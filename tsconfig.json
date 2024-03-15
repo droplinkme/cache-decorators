@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": "./",
+    "types": ["node", "jest"],
+    "typeRoots": ["./node_modules/@types"],
+    "target": "ES6",
+    "lib": ["es6"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowJs": true,
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@core/*": ["./src/core/*"],
+      "@database/*": ["./src/database/*"]
+    }
+  },
+  "include": ["./src", "./index.ts", "./sample"]
+}

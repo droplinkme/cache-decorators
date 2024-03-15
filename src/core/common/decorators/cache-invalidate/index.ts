@@ -1,0 +1,1 @@
+export * from './cache-invalidate.decorator'

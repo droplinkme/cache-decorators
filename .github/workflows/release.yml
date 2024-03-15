@@ -1,0 +1,49 @@
+name: Release
+"on":
+  push:
+    branches:
+      - main
+      - beta
+      - "*.x"
+permissions:
+  contents: read # for checkout
+jobs:
+  release:
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+    name: release
+    runs-on: ubuntu-latest
+    container:
+      image: node:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: cache-decorators # SET DIRECTORY
+
+      - name: Install dependencies
+        working-directory: cache-decorators
+        run: npm ci
+
+      - name: Run npm audit
+        working-directory: cache-decorators
+        run: npm audit
+
+      - name: Run unit-tests
+        working-directory: cache-decorators
+        run: npm run test:cov
+
+      - name: Build project
+        working-directory: cache-decorators
+        run: npm run build
+
+      - name: Release
+        working-directory: cache-decorators
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npx semantic-release --debug
