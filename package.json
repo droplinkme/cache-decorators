@@ -67,10 +67,10 @@
     "tag": "latest"
   },
   "files": [
-    "dist/"
+    "built/"
   ],
   "_moduleAliases": {
-    "@core": "./dist/src/core/*",
-    "@database": "./dist/src/database/*"
+    "@core": "./built/src/core/*",
+    "@database": "./built/src/database/*"
   }
 }
