@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "built",
     "rootDir": ".",
     "baseUrl": "./",
     "types": ["node", "jest"],
@@ -26,6 +26,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "paths": {
       "@core/*": ["./src/core/*"],
       "@database/*": ["./src/database/*"]

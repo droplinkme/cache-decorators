@@ -14,9 +14,12 @@
     "caching",
     "redis"
   ],
+  "main": "./built/index.js",
+  "module": "./built/index.mjs",
+  "types": "./built/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./dist && tsc --project tsconfig.build.json",
-    "prepare": "yarn build && cp package.json dist",
+    "build": "rm -rf ./built && tsc --project tsconfig.build.json",
+    "prepare": "yarn build && cp package.json built",
     "test": "jest --coverage=false",
     "test:cov": "jest --coverage=true",
     "commit": "cz",
@@ -59,7 +62,6 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.2"
   },
-  "types": "index.d.ts",
   "publishConfig": {
     "access": "restricted",
     "tag": "latest"
