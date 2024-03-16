@@ -18,7 +18,7 @@
   "module": "./built/index.mjs",
   "types": "./built/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./built && tsc --project tsconfig.build.json",
+    "build": "rm -rf ./built && tsc --project tsconfig.build.json && tsc-alias",
     "prepare": "yarn build && cp package.json built",
     "test": "jest --coverage=false",
     "test:cov": "jest --coverage=true",
@@ -59,6 +59,7 @@
     "standard-version": "^9.5.0",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.2"
   },
