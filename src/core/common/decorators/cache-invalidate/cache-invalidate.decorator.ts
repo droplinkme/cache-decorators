@@ -3,10 +3,35 @@ import { createCacheDecorator } from "../create-cache-decorator";
 import { ICacheRepository } from "@database/interfaces/cache.interface";
 
 /**
- * Decorator that invalidates cache entries based on predefined conditions.
+ * Decorator that invalidate cache entries by based on predefined conditions.
+ * 
  * @template I - The input type.
  * @param {Omit<Input<I>, 'ttl' | 'no_cache'>} input - The input data excluding TTL and no_cache fields.
- * @returns {MethodDecorator} - The method decorator.
+ * @returns {MethodDecorator<I>} - The method decorator.
+ * 
+ * @example
+ * Example: Removing cache entries by key
+ * This example invalidate cache entries based on a specified key.
+ * ```
+ * @CacheInvalidate({ key: 'your-key' })
+ * async function handle(input: Input): Promise<any> {
+ *    // your implementation
+ * }
+ * ```
+ * 
+ * @example
+ * Example 2: With custom key function
+ * This method will invalidate cached data if available using a custom key generated from the input arguments.
+ * ```
+ * @CacheInvalidate<Input>({
+ *    key: (input) => {
+ *      return `${input.param1}:${input.param2}`; // Custom key based on input parameters
+ *    }
+ * })
+ * async function handle(input: Input): Promise<any> {
+ *    // your implementation
+ * }
+ * ```
  */
 export function CacheInvalidate<I = { [key: string]: any }>(input: Omit<Input<I>, 'ttl' | 'no_cache'>): MethodDecorator {
   /**

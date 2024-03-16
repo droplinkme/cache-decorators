@@ -8,6 +8,30 @@ import { ICacheRepository } from "@database/interfaces/cache.interface";
  * @template I - The input type.
  * @param {Omit<Input<I>, 'ttl' | 'no_cache'>} input - The input data excluding TTL and no_cache fields.
  * @returns {MethodDecorator<I>} - The method decorator.
+ * 
+ * @example
+ * Example: Removing cache entries by key prefix
+ * This example removes cache entries based on a specified prefix.
+ * ```
+ * @CacheRemoveByPrefix({ key: 'your-key-prefix' })
+ * async function handle(input: Input): Promise<any> {
+ *    // your implementation
+ * }
+ * ```
+ * 
+ * @example
+ * Example 2: With custom key prefix function
+ * This method will removes cached data if available using a custom key generated from the input arguments.
+ * ```
+ * @CacheRemoveByPrefix<Input>({
+ *    key: (input) => {
+ *      return `${input.param1}:${input.param2}`; // Custom key prefix based on input parameters
+ *    }
+ * })
+ * async function handle(input: Input): Promise<any> {
+ *    // your implementation
+ * }
+ * ```
  */
 export function CacheRemoveByPrefix<I = { [key: string]: any }>(input: Omit<Input<I>, 'ttl' | 'no_cache'>): MethodDecorator {
   /**

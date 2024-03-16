@@ -4,12 +4,35 @@ import { ICacheRepository } from "@database/interfaces/cache.interface";
 import { getKey } from "@core/common/utils";
 
 /**
- * Decorator that saves the output of a method into the cache.
+ * Decorator that caches the output of a method based on predefined conditions.
  * 
  * @template I - The input type.
  * @template O - The output type.
- * @param {Omit<Input<I, O>, 'no_cache'>} input - The input data excluding the no_cache field.
+ * @param {Omit<Input<I, O>, 'no_cache'>} input - The input data excluding the 'no_cache' field.
  * @returns {MethodDecorator<I>} - The method decorator.
+ * 
+ * @example
+ * Example 1: Using a constant key and TTL
+ * This example caches the output using a constant key and TTL.
+ * ```
+ * @CacheSave({ key: 'your-key', ttl: 60 })
+ * async function handle(input: Input): Promise<Output> {
+ *    // Your implementation
+ * }
+ * ```
+ * @example
+ * Example 2: Using a custom key function
+ * This example caches the output using a custom key generated from the input and output parameters.
+ * ```
+ * @CacheSave<Input, Output>({
+ *    key: (input, output) => {
+ *      return `your-key/${input.param1}/${output?.param2}`
+ *    }
+ * })
+ * async function handle(input: Input): Promise<Output> {
+ *    // Your implementation
+ * }
+ * ```
  */
 export function CacheSave<I = any, O = any>(input: Omit<Input<I, O>, 'no_cache'>): MethodDecorator {
   /**
