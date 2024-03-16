@@ -1,4 +1,4 @@
-# Cache Decorators (Beta)
+# Cache Decorators
 
 Cache Decorators is a lightweight TypeScript library that provides decorators for caching function results, seamlessly integrating with various caching implementations. It offers decorators for caching, invalidating cache entries, and removing cache entries based on predefined conditions. With Cache Decorators, you can easily enhance the performance of your applications by caching expensive function calls, reducing response times, and optimizing resource utilization.
 
