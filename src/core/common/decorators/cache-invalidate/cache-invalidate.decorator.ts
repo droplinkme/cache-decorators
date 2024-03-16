@@ -1,6 +1,6 @@
-import { Action, Input } from "../../types";
+import { Action, Input } from "@core/common/types";
 import { createCacheDecorator } from "../create-cache-decorator";
-import { ICacheRepository } from "@database/interfaces";
+import { ICacheRepository } from "@database/interfaces/cache.interface";
 
 /**
  * Decorator that invalidates cache entries based on predefined conditions.

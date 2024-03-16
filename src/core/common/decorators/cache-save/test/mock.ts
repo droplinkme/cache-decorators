@@ -27,7 +27,7 @@ export class Mock {
   }
 
   @CacheSave<Input, Output>({
-    custom_key: (input, output) => {
+    key: (input, output) => {
       return `${MOCK_KEY}/${input.id}/${(output as Output).key}`
     }
   })

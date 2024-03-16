@@ -18,7 +18,7 @@ export class Mock {
     return { ...input, success: true };
   }
 
-  @CacheRemove<Input>({ custom_key: (input) => `${MOCK_KEY}/${input.id}` })
+  @CacheRemove<Input>({ key: (input) => `${MOCK_KEY}/${input.id}` })
   async withCustomKey(input: Input): Promise<Output> {
     return { ...input, success: true };
   }

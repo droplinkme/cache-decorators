@@ -18,7 +18,7 @@ export class Mock {
     return { ...input, success: true };
   }
 
-  @CacheInvalidate<Input>({ custom_key: (input) => `${MOCK_KEY}/${input.id}` })
+  @CacheInvalidate<Input>({ key: (input) => `${MOCK_KEY}/${input.id}` })
   async withCustomKey(input: Input): Promise<Output> {
     return { ...input, success: true };
   }

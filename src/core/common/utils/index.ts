@@ -1,1 +1,1 @@
-export * from './get-key.util'
+export * from './get-key'

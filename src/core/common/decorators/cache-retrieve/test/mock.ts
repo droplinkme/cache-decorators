@@ -32,7 +32,7 @@ export class Mock {
   }
 
   @CacheRetrieve<Input>({
-    custom_key: (input) => {
+    key: (input) => {
       return `${MOCK_KEY}/${input.id}`
     }
   })

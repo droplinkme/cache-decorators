@@ -1,7 +1,7 @@
+import { Action, Input } from "@core/common/types";
 import { createCacheDecorator } from "../create-cache-decorator";
-import { Action, Input } from "../../types";
-import { getKey } from "../../utils";
-import { ICacheRepository } from "@database/interfaces";
+import { ICacheRepository } from "@database/interfaces/cache.interface";
+import { getKey } from "@core/common/utils";
 
 /**
  * Decorator that saves the output of a method into the cache.

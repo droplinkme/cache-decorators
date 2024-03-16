@@ -1,7 +1,7 @@
+import { Action, Input } from "@core/common/types";
+import { getMetadataArgsStorage } from "@core/global";
+import { ICacheRepository } from "@database/interfaces/cache.interface";
 import { getKey } from "../utils";
-import { Action, Input } from "../types";
-import { getMetadataArgsStorage } from "@core/global/globals";
-import { ICacheRepository } from "@database/interfaces";
 
 /**
  * Creates a cache decorator based on the provided action.
