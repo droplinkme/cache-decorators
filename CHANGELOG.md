@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/droplinkme/cache-decorators/compare/v1.3.3...v1.3.4) (2024-03-17)
+
+
+### Bug Fixes
+
+* export AdapterEnum ([ddce179](https://github.com/droplinkme/cache-decorators/commit/ddce1792b95e0c8b2a11ae7aafc9a4e950b2055b))
+
 ## [1.3.3](https://github.com/droplinkme/cache-decorators/compare/v1.3.2...v1.3.3) (2024-03-17)
 
 
