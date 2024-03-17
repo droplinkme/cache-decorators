@@ -5,7 +5,7 @@ import { randomUUID } from "crypto"
 
 describe('#CacheSave', () => {
   const dataSource = new DataSource();
-  dataSource.setRepository(new FakeCacheRepository());
+  dataSource.setCustomRepository(new FakeCacheRepository());
   const repository = dataSource.getRepository();
   const mock = new Mock()
 

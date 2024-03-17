@@ -8,7 +8,7 @@ export abstract class ICacheRepository {
    * @param {string} key - The key of the value to retrieve.
    * @returns {Promise<T | undefined>} - A promise that resolves to the retrieved value, or undefined if not found.
    */
-  public abstract recover<T = any>(key: string): Promise<T | undefined>;
+  public abstract retrieve<T = any>(key: string): Promise<T | undefined>;
 
   /**
    * Saves a value to the cache with the specified key and optional time-to-live (TTL).
@@ -49,16 +49,7 @@ export abstract class ICacheRepository {
    * @param {string} pattern - The pattern to match against the keys.
    * @returns {Promise<T[]>} - A promise that resolves to an array of matched values.
    */
-  public abstract getValuesByPattern<T = any>(pattern: string): Promise<T[]>;
-
-  /**
-   * Creates a hashed key for the specified hashable object.
-   * 
-   * @param {any} hashable - The object to hash.
-   * @param {string} [prefix] - Optional prefix to prepend to the hashed key.
-   * @returns {string} - The hashed key.
-   */
-  public abstract createHashedKey(hashable: any, prefix?: string): string;
+  public abstract retrieveByPattern<T = any>(pattern: string): Promise<T[]>;
 
   /**
    * Invalidates the cache entry identified by the specified key.
@@ -77,7 +68,7 @@ export abstract class ICacheRepository {
    * @param {boolean} [no_cache] - Optional flag to bypass caching.
    * @returns {Promise<T | undefined>} - A promise that resolves to the retrieved or saved value, or undefined if not found.
    */
-  public abstract recoverOrSave<T = any>(
+  public abstract retrieveOrSave<T = any>(
     key: string,
     fn: () => Promise<T>,
     ttl?: number,

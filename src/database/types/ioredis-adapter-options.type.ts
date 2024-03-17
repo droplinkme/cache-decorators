@@ -1,8 +1,5 @@
-import { adapter } from '@database/adapter'
-
-export type DataSourceOptions = {
-  adpter?: keyof typeof adapter;
-  host: string;
+export abstract class IORedisAdapterOptions {
+  host!: string;
   port?: number
   timeout?: number
   password?: string
@@ -10,4 +7,5 @@ export type DataSourceOptions = {
   retryStrategy?: (times: number) => number | void | null
   reconnectOnError?: (err: any) => boolean;
   maxRetries?: number;
+  adapter = 'ioredis'
 }

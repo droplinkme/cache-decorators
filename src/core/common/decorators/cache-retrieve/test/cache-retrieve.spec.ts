@@ -5,14 +5,14 @@ import { randomUUID } from "crypto"
 
 describe('#CacheRetrieve', () => {
   const dataSource = new DataSource();
-  dataSource.setRepository(new FakeCacheRepository());
+  dataSource.setCustomRepository(new FakeCacheRepository());
   const repository = dataSource.getRepository();
   const mock = new Mock()
 
-  let recoverOrSave: any;
+  let retrieveOrSave: any;
 
   beforeEach(() => {
-    recoverOrSave = jest.spyOn(repository, 'recoverOrSave');
+    retrieveOrSave = jest.spyOn(repository, 'retrieveOrSave');
   })
 
   const input: Input = {
@@ -25,7 +25,7 @@ describe('#CacheRetrieve', () => {
       fn: mock.onlyKey,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(recoverOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), undefined, undefined)
+        expect(retrieveOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), undefined, undefined)
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -36,7 +36,7 @@ describe('#CacheRetrieve', () => {
       fn: mock.keyAndTtl,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(recoverOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), MOCK_TTL, undefined)
+        expect(retrieveOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), MOCK_TTL, undefined)
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -47,7 +47,7 @@ describe('#CacheRetrieve', () => {
       fn: mock.keyAndTtlAndNoCache,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(recoverOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), MOCK_TTL, true)
+        expect(retrieveOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), MOCK_TTL, true)
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -59,7 +59,7 @@ describe('#CacheRetrieve', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         const custom_key = `${MOCK_KEY}/${input.id}`;
-        expect(recoverOrSave).toHaveBeenCalledWith(custom_key, expect.any(Function), undefined, undefined)
+        expect(retrieveOrSave).toHaveBeenCalledWith(custom_key, expect.any(Function), undefined, undefined)
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })

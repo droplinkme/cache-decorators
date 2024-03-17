@@ -41,7 +41,7 @@ export function CacheRetrieve<I = { [key: string]: any }>(input: Input<I>): Meth
    */
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository }) => {
     const fn = () => method.apply(instance, args);
-    return await repository.recoverOrSave(key as string, fn, input.ttl, input.no_cache);
+    return await repository.retrieveOrSave(key as string, fn, input.ttl, input.no_cache);
   };
 
   return createCacheDecorator<I>(input, action);

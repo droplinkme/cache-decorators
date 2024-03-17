@@ -1,1 +1,1 @@
-export * from './ioredis.repository'
+export * from './ioredis'

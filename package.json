@@ -32,10 +32,10 @@
     }
   },
   "dependencies": {
-    "ioredis": "^5.3.2",
     "reflect-metadata": "^0.2.1"
   },
   "devDependencies": {
+    "ioredis": "^5.3.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/exec": "^6.0.3",
