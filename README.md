@@ -18,7 +18,7 @@ npm install cache-decorators
 
 To start using Cache Decorators, follow these simple steps:
 
-1. **Initialize Repository**: Start by initializing the cache repository using your preferred caching solution. For example:
+**Initialize Repository**: Start by initializing the cache repository using your preferred caching solution. For example:
 
 ```typescript
 import { DataSource } from "@droplink/cache-decorators";
@@ -34,7 +34,7 @@ dataSource.initialize<"ioredis">({
 
 **Initialize Custom Repository**
 
-Alternatively, you can define your own custom repository implementation.OR you can set your custom repository implementation
+Alternatively, you can define your own custom repository implementation
 
 ```typescript
 import { ICacheRepository } from "@droplink/cache-decorators"; // Ensure that this interface is implemented to provide all necessary methods for decorators
@@ -48,12 +48,15 @@ Then you can initialize your custom repository, like this:
 
 ```typescript
 import { DataSource } from "@droplink/cache-decorators";
+import { YourCustomRepository } from "../YourCustomRepository";
 
 const dataSource = new DataSource();
 dataSource.setCustomRepository(YourCustomRepository);
 ```
 
-2. **Apply Decorators**: Apply the cache decorators to your functions. For example:
+## Using Decorators
+
+**Apply Decorators**: Apply the cache decorators to your functions. For example:
 
 **@CacheSave**
 
