@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/droplinkme/cache-decorators/compare/v1.3.1...v1.3.2) (2024-03-17)
+
+
+### Bug Fixes
+
+* change plugins semantic-release ([266a55a](https://github.com/droplinkme/cache-decorators/commit/266a55a5d4d9c8bedbe765528ca12f46eb9c4805))
+
 ## [1.3.1](https://github.com/droplinkme/cache-decorators/compare/v1.3.0...v1.3.1) (2024-03-16)
 
 
