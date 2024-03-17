@@ -1,3 +1,5 @@
 export * from './interfaces'
 export * from './datasource'
 export * from './types'
+export * from './enums'
+export * from './adapters'
