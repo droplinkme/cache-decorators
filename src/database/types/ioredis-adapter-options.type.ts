@@ -7,5 +7,5 @@ export abstract class IORedisAdapterOptions {
   retryStrategy?: (times: number) => number | void | null
   reconnectOnError?: (err: any) => boolean;
   maxRetries?: number;
-  adapter = 'ioredis'
+  // adapter = 'ioredis'
 }

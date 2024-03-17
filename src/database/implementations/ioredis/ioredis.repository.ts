@@ -10,8 +10,14 @@ import { RemoveByPrefix } from './methods/remove-by-prefix.method';
 import { Invalidate } from './methods/invalidate.method';
 import { FlushAll } from './methods/flush-all.method';
 import { RetrieveByPattern } from './methods/retrieve-by-patter.method';
+import { Redis } from 'ioredis';
+import { AdaptersEnum } from '@database/enums';
 
-export class IORedisCacheRepository extends IORedisResource implements ICacheRepository {
+export class IORedisCacheRepository extends IORedisResource implements ICacheRepository<AdaptersEnum, Redis> {
+  constructor() {
+    super()
+  }
+
   public save = new Save(this).execute;
   public retrieve = new Retrieve(this).execute;
   public remove = new Remove(this).execute;

@@ -1,6 +1,10 @@
 import { ICacheRepository } from ".."
+import { FakeResource } from "./resource.fake";
 
-export class FakeCacheRepository implements ICacheRepository {
+export class FakeCacheRepository extends FakeResource implements ICacheRepository {
+  constructor() {
+    super()
+  }
   public retrieve = jest.fn();
   public save = jest.fn();
   public remove = jest.fn();

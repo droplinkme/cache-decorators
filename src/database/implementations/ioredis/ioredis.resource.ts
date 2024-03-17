@@ -1,18 +1,19 @@
 import { ConnectionExceptions } from "@core/exceptions";
+import { AdaptersEnum } from "@database/enums";
 import { IResource } from "@database/index";
-import { IORedisAdapterOptions } from "@database/types";
+import { DataSourceOptions } from "@database/types";
 import { Redis } from "ioredis";
 
-export class IORedisResource extends IResource<'ioredis', Redis> {
-  public static _client: Redis;
+export class IORedisResource implements IResource<AdaptersEnum.REDIS, Redis> {
+  public _client?: Redis;
 
-  protected async connect(config: IORedisAdapterOptions): Promise<void> {
-    if (IORedisResource._client) {
-      return;
+  public async connect(config: DataSourceOptions<AdaptersEnum.REDIS>): Promise<this> {
+    if (this._client) {
+      return this;
     }
 
     try {
-      IORedisResource._client = new Redis({
+      this._client = new Redis({
         host: config.host,
         port: config.port ?? 6379,
         password: config.password,
@@ -21,19 +22,21 @@ export class IORedisResource extends IResource<'ioredis', Redis> {
         reconnectOnError: config.reconnectOnError,
         maxRetriesPerRequest: config.maxRetries
       });
+
+      return this
     } catch (err) {
       throw err;
     }
   }
 
-  protected disconnect(): void {
-    if (IORedisResource._client) {
-      IORedisResource._client.disconnect();
+  public disconnect(): void {
+    if (this._client) {
+      this._client.disconnect();
     }
   }
 
   public validateConnection(): void {
-    if (IORedisResource._client.status !== 'ready') {
+    if (!this._client || this._client.status !== 'ready') {
       throw new ConnectionExceptions('RedisCacheRepository not connected');
     }
   }

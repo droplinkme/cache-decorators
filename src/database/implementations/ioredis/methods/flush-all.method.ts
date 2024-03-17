@@ -5,7 +5,7 @@ export class FlushAll {
   public async execute(): Promise<void> {
     try {
       this.repository.validateConnection();
-      await IORedisCacheRepository._client.flushall();
+      await this.repository._client?.flushall();
     } catch (err) {
       throw err;
     }

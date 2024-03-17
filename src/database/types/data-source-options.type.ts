@@ -1,10 +1,4 @@
-import { Adapter } from '@database/adapters';
-import { IORedisAdapterOptions } from './ioredis-adapter-options.type';
-import { MongoDBAdapterOptions } from './mongodb-adapter-options.type';
+import { AdapterOptions } from './adapter-options.type';
+import { AdaptersEnum } from '@database/enums';
 
-type AdapterOptions = {
-  ioredis: IORedisAdapterOptions;
-  mongodb: MongoDBAdapterOptions;
-};
-
-export type DataSourceOptions<T extends keyof typeof Adapter> = T extends keyof typeof Adapter ? AdapterOptions[T] : never;
+export type DataSourceOptions<Adapter extends AdaptersEnum> = Adapter extends AdaptersEnum ? AdapterOptions[Adapter] : never;

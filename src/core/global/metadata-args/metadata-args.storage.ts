@@ -1,10 +1,11 @@
 import { NoCacheRepositoryExceptions } from "@core/exceptions";
+import { AdaptersEnum } from "@database/enums";
 import { ICacheRepository } from "@database/interfaces"
 
 export class MetadataArgsStorage {
-  private cacheRepository?: ICacheRepository
+  private cacheRepository?: ICacheRepository<any, any>
 
-  getCacheRepository(): ICacheRepository {
+  getCacheRepository<Adapter extends AdaptersEnum, Client = any>(): ICacheRepository<Adapter, Client> {
     if (!this.cacheRepository) {
       throw new NoCacheRepositoryExceptions("Cache repository not initialized");
 
@@ -12,7 +13,7 @@ export class MetadataArgsStorage {
     return this.cacheRepository
   }
 
-  setCacheRepository(repository: ICacheRepository) {
+  setCacheRepository<Client = any>(repository: ICacheRepository<any, Client>) {
     this.cacheRepository = repository
   }
 }

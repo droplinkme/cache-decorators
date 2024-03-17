@@ -1,7 +1,10 @@
+import { AdaptersEnum } from "@database/enums";
+import { IResource } from "..";
+
 /**
  * Interface representing a cache repository.
  */
-export abstract class ICacheRepository {
+export abstract class ICacheRepository<Adapter extends AdaptersEnum = any, Client = any> extends IResource<Adapter, Client> {
   /**
    * Retrieves a value from the cache by key.
    * 
