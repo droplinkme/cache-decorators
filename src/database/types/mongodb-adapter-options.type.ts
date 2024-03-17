@@ -1,4 +1,4 @@
 export abstract class MongoDBAdapterOptions {
-  mongoHost!: string;
+  host!: string;
   port?: number
 }
