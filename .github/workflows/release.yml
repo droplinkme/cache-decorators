@@ -21,12 +21,6 @@ jobs:
         image: redis
         ports:
           - 6379:6379
-    container:
-      image: node:latest
-      ports:
-        - 3000:3000
-    container:
-      image: node:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
