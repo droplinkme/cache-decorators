@@ -16,6 +16,15 @@ jobs:
       id-token: write # to enable use of OIDC for npm provenance
     name: release
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+    container:
+      image: node:latest
+      ports:
+        - 3000:3000
     container:
       image: node:latest
     steps:
@@ -34,7 +43,9 @@ jobs:
 
       - name: Run unit-tests
         working-directory: cache-decorators
-        run: npm run test:cov
+        run: |
+          npm run test:cov
+          npm run test:e2e
 
       - name: Build project
         working-directory: cache-decorators

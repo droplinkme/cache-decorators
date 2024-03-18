@@ -2,7 +2,7 @@ module.exports = {
   clearMocks: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testMatch: ['**/*.spec.ts'],
+  // testMatch: ['**/*.spec.ts'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['text-summary', 'lcov', 'text', 'json-summary'],
