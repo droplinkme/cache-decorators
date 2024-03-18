@@ -6,7 +6,7 @@ export class RetrieveByPattern {
     try {
       this.repository.validateConnection();
 
-      const stream = this.repository._client?.scanStream({
+      const stream = IORedisCacheRepository._client?.scanStream({
         match: pattern,
         count: 10
       });
@@ -28,7 +28,7 @@ export class RetrieveByPattern {
           }
           const values: T[] = await Promise.all<T>(
             [...keys].map(async (key) => {
-              const result = await this.repository._client?.get(key);
+              const result = await IORedisCacheRepository._client?.get(key);
               if (result) {
                 return JSON.parse(result);
               }

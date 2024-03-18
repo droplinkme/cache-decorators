@@ -5,7 +5,7 @@ export class Invalidate {
   public async execute(key: string): Promise<void> {
     try {
       this.repository.validateConnection();
-      await this.repository._client?.expire(key, 1);
+      await IORedisCacheRepository._client?.expire(key, 1);
     } catch (err) {
       throw err;
     }

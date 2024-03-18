@@ -6,7 +6,7 @@ export class Remove {
     try {
       this.repository.validateConnection();
 
-      await this.repository._client?.del(key);
+      await IORedisCacheRepository._client?.del(key);
     } catch (err) {
       throw err;
     }

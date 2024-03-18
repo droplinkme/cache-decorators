@@ -5,15 +5,15 @@ import { DataSourceOptions } from "@database/types";
 import { Redis } from "ioredis";
 
 export class IORedisResource implements IResource<AdaptersEnum.REDIS, Redis> {
-  public _client?: Redis;
+  public static _client?: Redis;
 
   public async connect(config: DataSourceOptions<AdaptersEnum.REDIS>): Promise<this> {
-    if (this._client) {
+    if (IORedisResource._client) {
       return this;
     }
 
     try {
-      this._client = new Redis({
+      IORedisResource._client = new Redis({
         host: config.host,
         port: config.port ?? 6379,
         password: config.password,
@@ -30,13 +30,13 @@ export class IORedisResource implements IResource<AdaptersEnum.REDIS, Redis> {
   }
 
   public disconnect(): void {
-    if (this._client) {
-      this._client.disconnect();
+    if (IORedisResource._client) {
+      IORedisResource._client.disconnect();
     }
   }
 
   public validateConnection(): void {
-    if (!this._client || this._client.status !== 'ready') {
+    if (!IORedisResource._client || IORedisResource._client.status !== 'ready') {
       throw new ConnectionExceptions('RedisCacheRepository not connected');
     }
   }

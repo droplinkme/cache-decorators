@@ -5,7 +5,7 @@ export class Retrieve {
   public async execute<T = any>(key: string): Promise<T | undefined> {
     try {
       this.repository.validateConnection();
-      const valueStr = await this.repository._client?.get(key);
+      const valueStr = await IORedisCacheRepository._client?.get(key);
       if (valueStr) return JSON.parse(valueStr);
     } catch (err) {
       throw err;

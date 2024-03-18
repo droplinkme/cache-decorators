@@ -4,7 +4,6 @@ import { getMetadataArgsStorage } from "@core/global/globals";
 import { NoCacheRepositoryExceptions } from "@core/exceptions";
 import { DataSourceOptions } from "./types";
 import { AdaptersEnum } from "./enums";
-import { Redis } from "ioredis";
 
 /**
  * Class representing a data source.
@@ -17,14 +16,15 @@ export class DataSource {
    * @param {DataSourceOptions} options - The options to initialize the data source.
    * @returns {Promise<ICacheRepository>} - A promise that resolves to the initialized cache repository.
    */
-  async initialize<Adapter extends AdaptersEnum = any, Client = any>(adapter: Adapter, options: DataSourceOptions<Adapter>): Promise<ICacheRepository<Adapter, Client>> {
+  public async initialize<Adapter extends AdaptersEnum = any, Client = any>(adapter: Adapter, options: DataSourceOptions<Adapter>): Promise<ICacheRepository<Adapter, Client>> {
     const Repository = AdapterMap<Adapter, Client>().get(adapter);
 
     if (!Repository) {
       throw new NoCacheRepositoryExceptions("No cache adapter found.");
     }
 
-    const repository = await new Repository().connect(options)
+    const repository = new Repository(options);
+    await repository.connect(options)
     getMetadataArgsStorage().setCacheRepository(repository)
     return repository
   }

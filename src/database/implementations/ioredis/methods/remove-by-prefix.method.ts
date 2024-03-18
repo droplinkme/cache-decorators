@@ -6,9 +6,9 @@ export class RemoveByPrefix {
     try {
       this.repository.validateConnection();
 
-      const pipeline = this.repository._client?.pipeline();
+      const pipeline = IORedisCacheRepository._client?.pipeline();
 
-      await this.repository._client?.keys(`${prefix}*`)
+      await IORedisCacheRepository._client?.keys(`${prefix}*`)
         .then((keys) => { keys.forEach((key) => pipeline?.del(key)); });
 
       await pipeline?.exec();

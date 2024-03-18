@@ -1,5 +1,5 @@
 import { AdaptersEnum } from "@database/enums";
-import { IResource } from "..";
+import { IResource } from "./resource.interface";
 
 /**
  * Interface representing a cache repository.
