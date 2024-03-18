@@ -16,6 +16,8 @@ jobs:
       id-token: write # to enable use of OIDC for npm provenance
     name: release
     runs-on: ubuntu-latest
+    container:
+      image: node:latest
     services:
       redis:
         image: redis
