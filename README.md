@@ -1,5 +1,11 @@
 # Cache Decorators
 
+[![MAIN CI status](https://github.com/droplinkme/cache-decorators/actions/workflows/release.yml/badge.svg)](https://github.com/droplinkme/cache-decorators/actions/workflows/release.yml?query=branch%3Amain)
+
+<!-- [![NPM badge](https://img.shields.io/npm/v/@droplinkme/cache-decorators)](https://www.npmjs.com/package/@droplinkme/cache-decorators)
+[![dependencies badge](https://img.shields.io/librariesio/release/npm/@droplinkme/cache-decorators)](https://libraries.io/npm/@droplinkme/cache-decorators)
+[![Coverage Status](https://coveralls.io/repos/github/droplinkme/cache-decorators/badge.svg)](https://coveralls.io/github/droplinkme/cache-decorators) -->
+
 Cache Decorators is a lightweight TypeScript library that provides decorators for caching function results, seamlessly integrating with various caching implementations. It offers decorators for caching, invalidating cache entries, and removing cache entries based on predefined conditions. With Cache Decorators, you can easily enhance the performance of your applications by caching expensive function calls, reducing response times, and optimizing resource utilization.
 
 ## Solution
@@ -21,12 +27,11 @@ To start using Cache Decorators, follow these simple steps:
 **Initialize Repository**: Start by initializing the cache repository using your preferred caching solution. For example:
 
 ```typescript
-import { DataSource } from "@droplink/cache-decorators";
+import { DataSource, AdapterEnum } from "@droplink/cache-decorators";
 
 const dataSource = new DataSource();
 
-// Choose the driver repository initialize<'ioredis' | 'memcached' | 'mongodb'>
-dataSource.initialize<"ioredis">({
+dataSource.initialize(AdapterEnum.REDIS, {
   host: process.env.REDIS_HOST, // Set your caching host
   port: Number(process.env.REDIS_PORT), // Set your caching port
 });
@@ -39,7 +44,7 @@ Alternatively, you can define your own custom repository implementation
 ```typescript
 import { ICacheRepository } from "@droplink/cache-decorators"; // Ensure that this interface is implemented to provide all necessary methods for decorators
 
-export class YourCustomRepository implements ICacheRepository {
+export class MyCustomRepository implements ICacheRepository {
   // Implement the required methods here
 }
 ```
@@ -48,10 +53,10 @@ Then you can initialize your custom repository, like this:
 
 ```typescript
 import { DataSource } from "@droplink/cache-decorators";
-import { YourCustomRepository } from "../YourCustomRepository";
+import { MyCustomRepository } from "../MyCustomRepository";
 
 const dataSource = new DataSource();
-dataSource.setCustomRepository(YourCustomRepository);
+dataSource.setCustomRepository(new MyCustomRepository());
 ```
 
 ## Using Decorators
@@ -61,51 +66,56 @@ dataSource.setCustomRepository(YourCustomRepository);
 **@CacheSave**
 
 ```typescript
+class MyClass {
   @CacheSave({ key: "my-key", ttl: 60 }) // TTL is specified in seconds
   public async save(): Promise<any> {
     // Your function logic here
   }
-
+}
 ```
 
 **@CacheRetrieve**
 
 ```typescript
+class MyClass {
   @CacheRetrieve({ key: "my-key", ttl: 60 }) // TTL is specified in seconds
   public async get(): Promise<any> {
     // Your function logic here
   }
-
+}
 ```
 
 **@CacheRemove**
 
 ```typescript
+class MyClass {
   @CacheRemove({ key: "my-key" })
   public async save(): Promise<any> {
     // Your function logic here
   }
-
+}
 ```
 
 **@CacheRemoveByPrefix**
 
 ```typescript
+class MyClass {
   @CacheRemoveByPrefix({ key: "my-key-prefix" })
   public async save(): Promise<any> {
     // Your function logic here
   }
-
+}
 ```
 
 **@CacheInvalidate**
 
 ```typescript
+class MyClass {
   @CacheInvalidate({ key: "my-key" })
   public async save(): Promise<any> {
     // Your function logic here
   }
-
+}
 ```
 
 **Using Custom Keys**
@@ -117,25 +127,28 @@ You have the flexibility to define custom keys for all decorators, as demonstrat
 You can specify the types for your input and use them to create a dynamic key based on the input arguments.
 
 ```typescript
+class MyClass {
   @CacheRetrieve<Input>({ key: (input) => `my-prefix/${input.myParams}` })
   public async save(input: Input): Promise<any> {
     // Your function logic here
   }
-
+}
 ```
-
-And the custom key for CacheSave
 
 **@CacheSave**
 
 You can specify the types for your input and output and use them to create a dynamic key based on the input and output arguments.
 
 ```typescript
-  @CacheSave<Input, Output>({ key: (input, output) => `my-prefix/${input.myInputParams}/${output.myOutputParams}` })
+class MyClass {
+  @CacheSave<Input, Output>({
+    key: (input, output) =>
+      `my-prefix/${input.myInputParams}/${output.myOutputParams}`,
+  })
   public async save(input: Input): Promise<Output> {
     // Your function logic here
   }
-
+}
 ```
 
 ## License
