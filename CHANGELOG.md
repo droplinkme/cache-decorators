@@ -1,3 +1,12 @@
+## [1.3.5](https://github.com/droplinkme/cache-decorators/compare/v1.3.4...v1.3.5) (2024-03-18)
+
+
+### Bug Fixes
+
+* change e2e test and try add in ci actions ([ac2892c](https://github.com/droplinkme/cache-decorators/commit/ac2892cf112a8259d1ac183fd2541be7dccdc273))
+* comment test:e2e from ci ([9b8f1f7](https://github.com/droplinkme/cache-decorators/commit/9b8f1f7365d50f288008989c57c98204769f6c30))
+* resolve circular import from IResource in ICacheRepository and add test e2e for Redis Client ([5ffaf0b](https://github.com/droplinkme/cache-decorators/commit/5ffaf0b4937e4bee9c64cc62dd702ed0416b1e55))
+
 ## [1.3.4](https://github.com/droplinkme/cache-decorators/compare/v1.3.3...v1.3.4) (2024-03-17)
 
 
