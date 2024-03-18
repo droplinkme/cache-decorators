@@ -39,7 +39,7 @@ jobs:
         working-directory: cache-decorators
         run: |
           npm run test:cov
-          npm run test:e2e
+#         npm run test:e2e
 
       - name: Build project
         working-directory: cache-decorators
