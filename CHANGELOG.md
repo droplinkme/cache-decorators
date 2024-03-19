@@ -1,3 +1,10 @@
+## [1.5.12](https://github.com/droplinkme/cache-decorators/compare/v1.5.11...v1.5.12) (2024-03-19)
+
+
+### Bug Fixes
+
+* update keywords for npm ([6b7c3d9](https://github.com/droplinkme/cache-decorators/commit/6b7c3d94f6fce616b88a1ca116b9203eabd4c0c9))
+
 ## [1.5.11](https://github.com/droplinkme/cache-decorators/compare/v1.5.10...v1.5.11) (2024-03-19)
 
 
