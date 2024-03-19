@@ -41,7 +41,13 @@ jobs:
         working-directory: cache-decorators
         run: |
           npm run test:cov
-#         npm run test:e2e
+
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coveralls-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
 
       - name: Build project
         working-directory: cache-decorators
@@ -60,4 +66,4 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          persist-credentials: false # <--- this
+          persist-credentials: false
