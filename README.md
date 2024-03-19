@@ -157,10 +157,6 @@ class MyClass {
 }
 ```
 
-## Packages
-
-- [Nome do Seu Pacote npm](https://www.npmjs.com/package/@droplink/cache-decorators)
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
