@@ -1,3 +1,13 @@
+## [1.5.10](https://github.com/droplinkme/cache-decorators/compare/v1.5.9...v1.5.10) (2024-03-19)
+
+
+### Bug Fixes
+
+* change timeout to flush cash when run e2e tests ([c498cde](https://github.com/droplinkme/cache-decorators/commit/c498cde6c4e3757038fdba68b3af9e1bff95078d))
+* comment new implementation for mongodb ([f9f638b](https://github.com/droplinkme/cache-decorators/commit/f9f638b809e5bfbb9bf8a8da23a6b35cc0517310))
+* remove enum MONGODB until implementations ([863d91e](https://github.com/droplinkme/cache-decorators/commit/863d91ef7ab9345e92c4f0ec3d56da22faac3b83))
+* update .lock files ([07d2733](https://github.com/droplinkme/cache-decorators/commit/07d2733786fdac0340677c64ee8237d9f29c2005))
+
 ## [1.5.9](https://github.com/droplinkme/cache-decorators/compare/v1.5.8...v1.5.9) (2024-03-19)
 
 
