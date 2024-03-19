@@ -1,3 +1,10 @@
+## [1.5.13](https://github.com/droplinkme/cache-decorators/compare/v1.5.12...v1.5.13) (2024-03-19)
+
+
+### Bug Fixes
+
+* add more information in package.json ([638fc51](https://github.com/droplinkme/cache-decorators/commit/638fc5189ab886a48706d279149b23c8069f5b22))
+
 ## [1.5.12](https://github.com/droplinkme/cache-decorators/compare/v1.5.11...v1.5.12) (2024-03-19)
 
 
