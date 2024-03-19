@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/droplinkme/cache-decorators/compare/v1.5.0...v1.5.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* remove registry config from package.json ([8d8c778](https://github.com/droplinkme/cache-decorators/commit/8d8c778da06618b388f570fa3bd53ee8d1f2ee3c))
+
 # [1.5.0](https://github.com/droplinkme/cache-decorators/compare/v1.4.0...v1.5.0) (2024-03-19)
 
 
