@@ -1,14 +1,14 @@
 import { AdaptersEnum } from "@database/enums"
-import { ICacheRepository, RetrieveActionInput } from "@database/index"
+import { ICacheRepository, InvalidateActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
-import { RetrieveAction } from "./action";
+import { InvalidateAction } from "./action";
 
-describe('REDIS RETRIEVE ACTION', () => {
+describe('REDIS INVALIDATE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: RetrieveAction
+  let action: InvalidateAction
 
   beforeAll(async () => {
     repository = await initializeTestRepository(AdaptersEnum.REDIS, {
@@ -22,28 +22,31 @@ describe('REDIS RETRIEVE ACTION', () => {
   })
 
   beforeEach(async () => {
-    action = new RetrieveAction(repository);
+    action = new InvalidateAction(repository);
   })
 
   const value = { id: randomUUID() };
 
-  const input: RetrieveActionInput = {
+  const input: InvalidateActionInput = {
     key: randomUUID(),
-  }
-
-  const output = {
-    ...value,
   }
 
   it.each([
     {
-      should: 'Should retrieve cache successfuly in Redis',
+      should: 'Should invalidate cache successfuly in Redis',
       input,
       setup: async () => {
         await repository.save({ key: input.key, value })
       },
       expected: async (result: any) => {
-        expect(result).toStrictEqual(output)
+        const beforeRetrieve = await repository.retrieve({ key: input.key })
+        expect(beforeRetrieve).toStrictEqual(value)
+        await new Promise((resolve) => {
+          setTimeout(resolve, 1000)
+        })
+        const afterRetrieve = await repository.retrieve({ key: input.key })
+        expect(afterRetrieve).toBeUndefined()
+        expect(result).toBeUndefined()
       }
     },
   ])('$should', async ({ expected, input, setup }) => {

@@ -67,6 +67,7 @@
     "typescript": "^5.4.2"
   },
   "publishConfig": {
+    "@droplink:registry": "https://npm.pkg.github.com",
     "access": "restricted",
     "tag": "latest"
   },

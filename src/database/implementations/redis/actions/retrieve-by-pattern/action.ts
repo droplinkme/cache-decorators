@@ -1,9 +1,9 @@
-import { Action } from "@database/interfaces";
+import { Action, ICacheRepository } from "@database/interfaces";
 import { RedisCacheRepository } from "../../redis.repository";
 import { RetrieveByPatternActionInput } from "@database/types";
 
 export class RetrieveByPatternAction extends Action<RetrieveByPatternActionInput> {
-  constructor(protected readonly repository: RedisCacheRepository) {
+  constructor(protected readonly repository: ICacheRepository) {
     super(repository)
   }
 

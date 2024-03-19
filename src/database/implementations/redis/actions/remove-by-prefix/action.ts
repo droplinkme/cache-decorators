@@ -1,9 +1,9 @@
-import { Action } from "@database/interfaces";
+import { Action, ICacheRepository } from "@database/interfaces";
 import { RedisCacheRepository } from "../../redis.repository";
 import { RemoveByPrefixActionInput } from "@database/types";
 
 export class RemoveByPrefixAction extends Action<RemoveByPrefixActionInput> {
-  constructor(protected readonly repository: RedisCacheRepository) {
+  constructor(protected readonly repository: ICacheRepository) {
     super(repository)
   }
 
@@ -11,7 +11,7 @@ export class RemoveByPrefixAction extends Action<RemoveByPrefixActionInput> {
     const pipeline = RedisCacheRepository._client.pipeline();
 
     await RedisCacheRepository._client.keys(`${prefix}*`)
-      .then((keys) => { keys.forEach((key) => pipeline?.del(key)); });
+      .then((keys) => { keys.forEach((key) => pipeline.del(key)); });
 
     await pipeline.exec();
   }
