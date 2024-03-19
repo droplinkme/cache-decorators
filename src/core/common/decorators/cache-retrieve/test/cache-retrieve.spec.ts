@@ -24,7 +24,12 @@ describe('#CacheRetrieve', () => {
       fn: mock.onlyKey,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(retrieveOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), undefined, undefined)
+        expect(retrieveOrSave).toHaveBeenCalledWith({
+          key: MOCK_KEY,
+          fn: expect.any(Function),
+          ttl: undefined,
+          no_cache: undefined
+        })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -35,7 +40,12 @@ describe('#CacheRetrieve', () => {
       fn: mock.keyAndTtl,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(retrieveOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), MOCK_TTL, undefined)
+        expect(retrieveOrSave).toHaveBeenCalledWith({
+          key: MOCK_KEY,
+          fn: expect.any(Function),
+          ttl: MOCK_TTL,
+          no_cache: undefined
+        })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -46,7 +56,12 @@ describe('#CacheRetrieve', () => {
       fn: mock.keyAndTtlAndNoCache,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(retrieveOrSave).toHaveBeenCalledWith(MOCK_KEY, expect.any(Function), MOCK_TTL, true)
+        expect(retrieveOrSave).toHaveBeenCalledWith({
+          key: MOCK_KEY,
+          fn: expect.any(Function),
+          ttl: MOCK_TTL,
+          no_cache: true
+        })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -58,7 +73,12 @@ describe('#CacheRetrieve', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         const custom_key = `${MOCK_KEY}/${input.id}`;
-        expect(retrieveOrSave).toHaveBeenCalledWith(custom_key, expect.any(Function), undefined, undefined)
+        expect(retrieveOrSave).toHaveBeenCalledWith({
+          key: custom_key,
+          fn: expect.any(Function),
+          ttl: undefined,
+          no_cache: undefined
+        })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })

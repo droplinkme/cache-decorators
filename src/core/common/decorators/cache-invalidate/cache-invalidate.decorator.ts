@@ -39,9 +39,9 @@ export function CacheInvalidate<I = { [key: string]: any }>(input: Omit<Input<I>
    * 
    * @type {Action<I, any, ICacheRepository>}
    */
-  const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository, }) => {
+  const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository }) => {
     const output = await method.apply(instance, args);
-    await repository.invalidate(key as string);
+    await repository.invalidate({ key: key as string });
     return output;
   };
   return createCacheDecorator<I>(input, action);

@@ -18,7 +18,7 @@ describe('#CacheRemove', () => {
       fn: mock.onlyKey,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(repository.remove).toHaveBeenCalledWith(MOCK_KEY)
+        expect(repository.remove).toHaveBeenCalledWith({ key: MOCK_KEY })
         expect(output).toEqual({
           ...input, success: true
         })
@@ -30,7 +30,7 @@ describe('#CacheRemove', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         const custom_key = `${MOCK_KEY}/${input.id}`;
-        expect(repository.remove).toHaveBeenCalledWith(custom_key)
+        expect(repository.remove).toHaveBeenCalledWith({ key: custom_key })
         expect(output).toEqual({
           ...input, success: true
         })

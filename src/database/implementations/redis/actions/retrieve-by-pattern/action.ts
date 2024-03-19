@@ -1,13 +1,14 @@
 import { Action } from "@database/interfaces";
-import { RedisCacheRepository } from "../redis.repository";
+import { RedisCacheRepository } from "../../redis.repository";
+import { RetrieveByPatternActionInput } from "@database/types";
 
-export class RetrieveByPatternAction extends Action {
+export class RetrieveByPatternAction extends Action<RetrieveByPatternActionInput> {
   constructor(protected readonly repository: RedisCacheRepository) {
     super(repository)
   }
 
-  protected async execute<T = any>(pattern: string): Promise<T[]> {
-    const stream = RedisCacheRepository._client?.scanStream({
+  protected async action<T = any>({ pattern }: RetrieveByPatternActionInput): Promise<T[]> {
+    const stream = RedisCacheRepository._client.scanStream({
       match: pattern,
       count: 10
     });
@@ -15,21 +16,21 @@ export class RetrieveByPatternAction extends Action {
     const result: T[] = await new Promise((resolve, reject) => {
       const keys = new Set<string>();
 
-      stream?.on('data', (data) => {
+      stream.on('data', (data) => {
         data.forEach(keys.add, keys);
       });
 
-      stream?.on('error', (err) => {
+      stream.on('error', (err) => {
         reject(err);
       });
 
-      stream?.on('end', async () => {
+      stream.on('end', async () => {
         if (keys.size === 0) {
           resolve([]);
         }
         const values: T[] = await Promise.all<T>(
           [...keys].map(async (key) => {
-            const result = await RedisCacheRepository._client?.get(key);
+            const result = await RedisCacheRepository._client.get(key);
             if (result) {
               return JSON.parse(result);
             }

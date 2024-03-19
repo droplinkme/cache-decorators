@@ -20,9 +20,10 @@
   "scripts": {
     "build": "rm -rf ./built && tsc --project tsconfig.build.json && tsc-alias",
     "prepare": "yarn build && cp package.json built",
-    "test": "jest --coverage=false --testRegex='\\.spec\\.ts$'",
-    "test:cov": "jest --coverage --testRegex='\\.spec\\.ts$'",
-    "test:e2e": "jest --coverage=false --testRegex='\\.e2e\\.test\\.ts$'",
+    "test": "jest --coverage=false --config=jest.config.unit.js",
+    "test:cov": "jest --coverage --config=jest.config.unit.js",
+    "test:e2e": "jest --coverage=false --config=jest.config.e2e.js",
+    "test:e2e:cov": "jest --coverage=true --config=jest.config.e2e.js",
     "commit": "cz",
     "release": "standard-version",
     "semantic-release": "npx semantic-release"

@@ -1,14 +1,14 @@
 import { AdaptersEnum } from "@database/enums"
-import { ICacheRepository, SaveActionInput } from "@database/index"
+import { ICacheRepository, RetrieveActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
-import { SaveAction } from "./action";
+import { RetrieveAction } from "./action";
 
-describe('REDIS SAVE ACTION', () => {
+describe('REDIS RETRIEVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: SaveAction
+  let action: RetrieveAction
 
   beforeAll(async () => {
     repository = await initializeTestRepository(AdaptersEnum.REDIS, {
@@ -22,15 +22,13 @@ describe('REDIS SAVE ACTION', () => {
   })
 
   beforeEach(async () => {
-    action = new SaveAction(repository);
+    action = new RetrieveAction(repository);
   })
 
   const value = { id: randomUUID() };
 
-  const input: SaveActionInput<typeof value> = {
+  const input: RetrieveActionInput = {
     key: randomUUID(),
-    value,
-    ttl: 60
   }
 
   const output = {
@@ -40,22 +38,12 @@ describe('REDIS SAVE ACTION', () => {
   it.each([
     {
       should: 'Should save cache successfuly in Redis without ttl',
-      input: { ...input, ttl: undefined },
-      setup: async () => { },
-      expected: async (result: any) => {
-        expect(result).toStrictEqual(output)
-        const cache = await repository.retrieve({ key: input.key });
-        expect(cache).toStrictEqual(result);
-      }
-    },
-    {
-      should: 'Should save cache successfuly in Redis with ttl',
       input,
-      setup: async () => { },
+      setup: async () => {
+        await repository.save({ key: input.key, value })
+      },
       expected: async (result: any) => {
         expect(result).toStrictEqual(output)
-        const cache = await repository.retrieve({ key: input.key });
-        expect(cache).toStrictEqual(result);
       }
     },
   ])('$should', async ({ expected, input, setup }) => {

@@ -44,7 +44,7 @@ describe('Redis', () => {
       expected: async (result: any) => {
         expect(result).toStrictEqual([output])
         const key = `${KEY}/${createHashedKey(input)}`;
-        const cache = await repository.retrieve(key);
+        const cache = await repository.retrieve({ key });
         expect(cache).toStrictEqual(result);
       }
     },
@@ -54,12 +54,12 @@ describe('Redis', () => {
       execute: mock.get,
       setup: async () => {
         const key = `${KEY}/${createHashedKey(input)}`;
-        await repository.save(key, [output])
+        await repository.save({ key, value: [output] })
       },
       expected: async (result: any) => {
         expect(result).toStrictEqual([output])
         const key = `${KEY}/${createHashedKey(input)}`;
-        const cache = await repository.retrieve(key);
+        const cache = await repository.retrieve({ key });
         expect(cache).toStrictEqual(result);
       }
     }

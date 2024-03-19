@@ -1,4 +1,4 @@
-import { ICacheRepository } from ".."
+import { ICacheRepository, RetrieveOrSaveActionInput } from ".."
 import { FakeResource } from "./resource.fake";
 
 export class FakeCacheRepository extends FakeResource implements ICacheRepository {
@@ -13,7 +13,7 @@ export class FakeCacheRepository extends FakeResource implements ICacheRepositor
   public retrieveByPattern = jest.fn();
   public createHashedKey = jest.fn();
   public invalidate = jest.fn();
-  public async retrieveOrSave<T = any>(key: string, fn: () => Promise<T>, ttl?: number | undefined, no_cache?: boolean | undefined): Promise<T | undefined> {
+  public async retrieveOrSave<T = any>({ fn }: RetrieveOrSaveActionInput): Promise<T | undefined> {
     return await fn();
   }
 

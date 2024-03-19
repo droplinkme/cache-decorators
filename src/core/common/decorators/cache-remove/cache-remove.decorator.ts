@@ -41,7 +41,7 @@ export function CacheRemove<I = { [key: string]: any }>(input: Omit<Input<I>, 't
    */
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository, }) => {
     const output = await method.apply(instance, args);
-    await repository.remove(key as string);
+    await repository.remove({ key: key as string });
     return output;
   };
 

@@ -18,7 +18,7 @@ describe('#CacheInvalidate', () => {
       fn: mock.onlyKey,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(repository.invalidate).toHaveBeenCalledWith(MOCK_KEY)
+        expect(repository.invalidate).toHaveBeenCalledWith({ key: MOCK_KEY })
         expect(output).toEqual({
           ...input, success: true
         })
@@ -30,7 +30,7 @@ describe('#CacheInvalidate', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         const custom_key = `${MOCK_KEY}/${input.id}`;
-        expect(repository.invalidate).toHaveBeenCalledWith(custom_key)
+        expect(repository.invalidate).toHaveBeenCalledWith({ key: custom_key })
         expect(output).toEqual({
           ...input, success: true
         })

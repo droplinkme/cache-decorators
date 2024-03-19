@@ -41,7 +41,7 @@ export function CacheRemoveByPrefix<I = { [key: string]: any }>(input: Omit<Inpu
    */
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository, }) => {
     const output = await method.apply(instance, args);
-    await repository.removeByPrefix(key as string);
+    await repository.removeByPrefix({ prefix: key as string });
     return output;
   };
   return createCacheDecorator<I>(input, action);

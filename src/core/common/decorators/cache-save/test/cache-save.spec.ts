@@ -18,7 +18,7 @@ describe('#CacheSave', () => {
       fn: mock.onlyKey,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(repository.save).toHaveBeenCalledWith(MOCK_KEY, output, undefined)
+        expect(repository.save).toHaveBeenCalledWith({ key: MOCK_KEY, value: output, ttl: undefined })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -29,7 +29,7 @@ describe('#CacheSave', () => {
       fn: mock.keyAndTtl,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(repository.save).toHaveBeenCalledWith(MOCK_KEY, output, MOCK_TTL)
+        expect(repository.save).toHaveBeenCalledWith({ key: MOCK_KEY, value: output, ttl: MOCK_TTL })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })
@@ -41,7 +41,7 @@ describe('#CacheSave', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         const custom_key = `${MOCK_KEY}/${input.id}/${output.key}`;
-        expect(repository.save).toHaveBeenCalledWith(custom_key, output, undefined)
+        expect(repository.save).toHaveBeenCalledWith({ key: custom_key, value: output, ttl: undefined })
         expect(output).toEqual({
           ...input, key: OUTPUT_KEY, success: true
         })

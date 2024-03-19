@@ -43,7 +43,7 @@ export function CacheSave<I = any, O = any>(input: Omit<Input<I, O>, 'no_cache'>
   const action: Action<I, O, ICacheRepository> = async ({ instance, method, args, repository }) => {
     const output = await method.apply(instance, args);
     const key = await getKey({ ...input, input: args[0], output });
-    await repository.save<O>(key, output, input.ttl);
+    await repository.save<O>({ key, value: output, ttl: input.ttl });
     return output;
   };
   return createCacheDecorator<I, O>(input, action, true);

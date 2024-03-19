@@ -18,7 +18,7 @@ describe('#CacheRemoveByPrefix', () => {
       fn: mock.onlyKey,
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
-        expect(repository.removeByPrefix).toHaveBeenCalledWith(MOCK_KEY)
+        expect(repository.removeByPrefix).toHaveBeenCalledWith({ prefix: MOCK_KEY })
         expect(output).toEqual({
           ...input, success: true
         })
@@ -30,7 +30,7 @@ describe('#CacheRemoveByPrefix', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         const custom_key = `${MOCK_KEY}/${input.id}`;
-        expect(repository.removeByPrefix).toHaveBeenCalledWith(custom_key)
+        expect(repository.removeByPrefix).toHaveBeenCalledWith({ prefix: custom_key })
         expect(output).toEqual({
           ...input, success: true
         })

@@ -5,7 +5,7 @@ import { DataSourceOptions } from "@database/types";
 import { Redis } from "ioredis";
 
 export class RedisResource implements IResource<AdaptersEnum.REDIS, Redis> {
-  public static _client?: Redis;
+  public static _client: Redis;
   public static logger?: (value: any) => void;
   public client?: Redis;
 
