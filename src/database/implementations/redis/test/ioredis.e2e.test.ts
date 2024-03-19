@@ -3,29 +3,20 @@ import { ID, KEY, Mock } from "./mock"
 import { DataSource, ICacheRepository } from "@database/index"
 import { createHashedKey } from "@core/utils/create-hash.util";
 import 'dotenv/config';
+import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 
 describe('Redis', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, any>;
 
   beforeAll(async () => {
-    const datasource = new DataSource();
-
-    repository = await datasource.initialize<AdaptersEnum.REDIS>(AdaptersEnum.REDIS, {
+    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
       host: process.env.REDIS_HOST as string,
       port: Number(process.env.REDIS_PORT),
-    });
-
-    await new Promise((resolve) => {
-      setTimeout(resolve, 100)
     })
   })
 
   afterAll(async () => {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 100)
-    })
-    await repository.flushAll()
-    repository.disconnect();
+    await disconnectTestRepository(repository);
   })
 
   beforeEach(async () => {

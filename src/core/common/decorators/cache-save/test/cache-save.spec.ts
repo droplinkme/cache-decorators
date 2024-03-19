@@ -4,9 +4,8 @@ import { FakeCacheRepository } from "@database/fake/repository.fake"
 import { randomUUID } from "crypto"
 
 describe('#CacheSave', () => {
-  const dataSource = new DataSource();
-  dataSource.setCustomRepository(new FakeCacheRepository());
-  const repository = dataSource.getRepository();
+  DataSource.setCustomRepository(new FakeCacheRepository());
+  const repository = DataSource.getRepository();
   const mock = new Mock()
 
   const input: Input = {
