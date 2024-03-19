@@ -2,10 +2,6 @@
   "name": "@droplink/cache-decorators",
   "version": "1.5.12",
   "description": "A library for caching with decorators",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/droplinkme/cache-decorators.git"
-  },
   "author": "Allan C Vieira <allancnfx.vieira@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -73,6 +69,14 @@
   "publishConfig": {
     "access": "public",
     "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/droplinkme/cache-decorators.git"
+  },
+  "homepage": "https://github.com/droplinkme/cache-decorators/blob/main/README.md",
+  "bugs": {
+    "url": "https://github.com/droplinkme/cache-decorators/issues"
   },
   "files": [
     "built/"
