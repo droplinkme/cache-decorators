@@ -1,3 +1,11 @@
+## [1.5.2](https://github.com/droplinkme/cache-decorators/compare/v1.5.1...v1.5.2) (2024-03-19)
+
+
+### Bug Fixes
+
+* test collected coverage from ci ([3bd5948](https://github.com/droplinkme/cache-decorators/commit/3bd59480a29aad8b8887df0c5d507dce9a635edc))
+* test setup coverage from actions ci ([f3661af](https://github.com/droplinkme/cache-decorators/commit/f3661afef87dbdb571c9cb022e2a1c2378c2c3a6))
+
 ## [1.5.1](https://github.com/droplinkme/cache-decorators/compare/v1.5.0...v1.5.1) (2024-03-19)
 
 
