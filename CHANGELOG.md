@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/droplinkme/cache-decorators/compare/v1.3.5...v1.4.0) (2024-03-19)
+
+
+### Features
+
+* refactor all Redis implementation and WIP tests e2e ([a5d4f17](https://github.com/droplinkme/cache-decorators/commit/a5d4f17d4197e84189349d8635dfddd2695a8733))
+
 ## [1.3.5](https://github.com/droplinkme/cache-decorators/compare/v1.3.4...v1.3.5) (2024-03-18)
 
 
