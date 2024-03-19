@@ -29,9 +29,7 @@ To start using Cache Decorators, follow these simple steps:
 ```typescript
 import { DataSource, AdapterEnum } from "@droplink/cache-decorators";
 
-const dataSource = new DataSource();
-
-dataSource.initialize(AdapterEnum.REDIS, {
+DataSource.initialize(AdapterEnum.REDIS, {
   host: process.env.REDIS_HOST, // Set your caching host
   port: Number(process.env.REDIS_PORT), // Set your caching port
 });
@@ -39,7 +37,9 @@ dataSource.initialize(AdapterEnum.REDIS, {
 
 **Initialize Custom Repository**
 
-Alternatively, you can define your own custom repository implementation
+Alternatively, you can define your own custom repository implementation.
+
+First, import the `ICacheRepository` interface from the `@droplink/cache-decorators` package. Ensure that this interface is implemented to provide all necessary methods for decorators.
 
 ```typescript
 import { ICacheRepository } from "@droplink/cache-decorators"; // Ensure that this interface is implemented to provide all necessary methods for decorators
@@ -49,14 +49,21 @@ export class MyCustomRepository implements ICacheRepository {
 }
 ```
 
-Then you can initialize your custom repository, like this:
+Then, initialize your custom repository like this:
 
 ```typescript
 import { DataSource } from "@droplink/cache-decorators";
 import { MyCustomRepository } from "../MyCustomRepository";
 
-const dataSource = new DataSource();
-dataSource.setCustomRepository(new MyCustomRepository());
+DataSource.setCustomRepository(new MyCustomRepository());
+```
+
+Now, you can get your custom repository anywhere in your code, like this:
+
+```typescript
+import { DataSource } from "@droplink/cache-decorators";
+
+const repository = DataSource.getCustomRepository();
 ```
 
 ## Using Decorators
