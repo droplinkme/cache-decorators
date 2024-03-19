@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/droplinkme/cache-decorators/compare/v1.4.0...v1.5.0) (2024-03-19)
+
+
+### Features
+
+* add test e2e for all actions for Redis repository ([b3ea0dd](https://github.com/droplinkme/cache-decorators/commit/b3ea0dd159df8aeae813b5d91c8eff79873876f7))
+
 # [1.4.0](https://github.com/droplinkme/cache-decorators/compare/v1.3.5...v1.4.0) (2024-03-19)
 
 
