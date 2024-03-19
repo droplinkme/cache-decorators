@@ -1,3 +1,10 @@
+## [1.5.9](https://github.com/droplinkme/cache-decorators/compare/v1.5.8...v1.5.9) (2024-03-19)
+
+
+### Bug Fixes
+
+* update .lock files and test publish public package ([724385b](https://github.com/droplinkme/cache-decorators/commit/724385be16b262e5778236dd6e151aba36386e65))
+
 ## [1.5.8](https://github.com/droplinkme/cache-decorators/compare/v1.5.7...v1.5.8) (2024-03-19)
 
 
