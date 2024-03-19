@@ -9,10 +9,14 @@
   "author": "Allan C Vieira <allancnfx.vieira@gmail.com>",
   "license": "MIT",
   "keywords": [
+    "typescript",
     "cache",
     "decorators",
+    "decorator",
     "caching",
-    "redis"
+    "ts",
+    "redis",
+    "ioredis"
   ],
   "main": "./built/index.js",
   "module": "./built/index.mjs",
