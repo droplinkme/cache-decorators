@@ -18,7 +18,7 @@ Cache Decorators adopts a decorator-based approach, allowing you to apply cachin
 You can install Cache Decorators via npm:
 
 ```bash
-npm install cache-decorators
+npm install @droplink/cache-decorators
 ```
 
 ## Getting Started
