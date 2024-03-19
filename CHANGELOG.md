@@ -1,3 +1,10 @@
+## [1.5.7](https://github.com/droplinkme/cache-decorators/compare/v1.5.6...v1.5.7) (2024-03-19)
+
+
+### Bug Fixes
+
+* set last version for semantic-release plugins ([9e08742](https://github.com/droplinkme/cache-decorators/commit/9e0874255475506e9a7223c9f2108a952b620bd1))
+
 ## [1.5.6](https://github.com/droplinkme/cache-decorators/compare/v1.5.5...v1.5.6) (2024-03-19)
 
 
