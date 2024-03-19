@@ -1,13 +1,10 @@
 # Cache Decorators
 
 [![MAIN CI status](https://github.com/droplinkme/cache-decorators/actions/workflows/release.yml/badge.svg)](https://github.com/droplinkme/cache-decorators/actions/workflows/release.yml?query=branch%3Amain)
-
-<!-- [![NPM badge](https://img.shields.io/npm/v/@droplinkme/cache-decorators)](https://www.npmjs.com/package/@droplinkme/cache-decorators)
--->
-
+[![Coverage Status](https://coveralls.io/repos/github/droplinkme/cache-decorators/badge.svg)](https://coveralls.io/github/droplinkme/cache-decorators)
 [![dependencies badge](https://img.shields.io/librariesio/release/github/droplinkme/cache-decorators)](https://libraries.io/github/droplinkme/cache-decorators)
 
-[![Coverage Status](https://coveralls.io/repos/github/droplinkme/cache-decorators/badge.svg)](https://coveralls.io/github/droplinkme/cache-decorators)
+<!-- [![NPM badge](https://img.shields.io/npm/v/@droplinkme/cache-decorators)](https://www.npmjs.com/package/@droplinkme/cache-decorators) -->
 
 Cache Decorators is a lightweight TypeScript library that provides decorators for caching function results, seamlessly integrating with various caching implementations. It offers decorators for caching, invalidating cache entries, and removing cache entries based on predefined conditions. With Cache Decorators, you can easily enhance the performance of your applications by caching expensive function calls, reducing response times, and optimizing resource utilization.
 
