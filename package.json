@@ -67,7 +67,7 @@
     "typescript": "^5.4.2"
   },
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "tag": "latest"
   },
   "files": [
