@@ -1,3 +1,10 @@
+## [1.5.14](https://github.com/droplinkme/cache-decorators/compare/v1.5.13...v1.5.14) (2024-03-19)
+
+
+### Bug Fixes
+
+* update .lock files ([e34489b](https://github.com/droplinkme/cache-decorators/commit/e34489b012ffd01d4f6a1374f31c7d0846261963))
+
 ## [1.5.13](https://github.com/droplinkme/cache-decorators/compare/v1.5.12...v1.5.13) (2024-03-19)
 
 
