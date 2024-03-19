@@ -2,7 +2,8 @@
 
 [![MAIN CI status](https://github.com/droplinkme/cache-decorators/actions/workflows/release.yml/badge.svg)](https://github.com/droplinkme/cache-decorators/actions/workflows/release.yml?query=branch%3Amain)
 [![Coverage Status](https://coveralls.io/repos/github/droplinkme/cache-decorators/badge.svg)](https://coveralls.io/github/droplinkme/cache-decorators)
-[![dependencies badge](https://img.shields.io/librariesio/release/github/droplinkme/cache-decorators)](https://libraries.io/github/droplinkme/cache-decorators)
+
+<!-- [![dependencies badge](https://img.shields.io/librariesio/release/github/droplinkme/cache-decorators)](https://libraries.io/github/droplinkme/cache-decorators) -->
 
 <!-- [![NPM badge](https://img.shields.io/npm/v/@droplinkme/cache-decorators)](https://www.npmjs.com/package/@droplinkme/cache-decorators) -->
 
