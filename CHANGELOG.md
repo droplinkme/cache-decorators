@@ -1,3 +1,10 @@
+## [1.5.8](https://github.com/droplinkme/cache-decorators/compare/v1.5.7...v1.5.8) (2024-03-19)
+
+
+### Bug Fixes
+
+* change package npm to public ([afd7586](https://github.com/droplinkme/cache-decorators/commit/afd75865f0d9a8ca59dd96c177410b313db56d3d))
+
 ## [1.5.7](https://github.com/droplinkme/cache-decorators/compare/v1.5.6...v1.5.7) (2024-03-19)
 
 
