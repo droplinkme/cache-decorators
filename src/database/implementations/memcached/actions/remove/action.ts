@@ -1,5 +1,5 @@
 import { Action, ICacheRepository } from "@database/interfaces";
-import { RedisCacheRepository } from "../../repository";
+import { MemcachedRepository } from "../../repository";
 import { RemoveActionInput } from "@database/types";
 
 export class RemoveAction extends Action<RemoveActionInput> {
@@ -8,6 +8,14 @@ export class RemoveAction extends Action<RemoveActionInput> {
   }
 
   protected async action({ key }: RemoveActionInput): Promise<void> {
-    await RedisCacheRepository._client.del(key);
+    return new Promise<void>((resolve, reject) => {
+      MemcachedRepository._client.del(key, (err, _) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
   }
 }

@@ -1,5 +1,5 @@
 
-import { RedisCacheRepository } from "@database/implementations/redis/redis.repository";
+import { RedisCacheRepository } from "@database/implementations";
 import { AdaptersEnum } from "../enums";
 import { ICacheRepository } from "../interfaces";
 

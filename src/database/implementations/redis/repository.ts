@@ -1,5 +1,5 @@
 import { ICacheRepository } from '@database/interfaces';
-import { RedisResource } from './redis.resource';
+import { RedisResource } from './resource';
 import { AdaptersEnum } from '@database/enums';
 import { Redis } from 'ioredis';
 import {

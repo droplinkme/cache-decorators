@@ -1,5 +1,5 @@
 import { Action, ICacheRepository } from "@database/interfaces";
-import { RedisCacheRepository } from "../../repository";
+import { MemcachedRepository } from "../../repository";
 import { SaveActionInput } from "@database/types";
 
 export class SaveAction extends Action<SaveActionInput> {
@@ -9,9 +9,14 @@ export class SaveAction extends Action<SaveActionInput> {
 
   protected async action<T = any>({ key, value, ttl }: SaveActionInput<T>): Promise<T> {
     const valueStr = JSON.stringify(value);
-    ttl
-      ? await RedisCacheRepository._client.set(key, valueStr, 'EX', ttl)
-      : await RedisCacheRepository._client.set(key, valueStr);
-    return value;
+    return new Promise<T>((resolve, reject) => {
+      MemcachedRepository._client.set(key, valueStr, ttl || 0, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(value);
+        }
+      });
+    });
   }
 }

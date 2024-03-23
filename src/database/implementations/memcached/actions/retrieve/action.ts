@@ -1,5 +1,5 @@
 import { Action, ICacheRepository } from "@database/interfaces";
-import { RedisCacheRepository } from "../../repository";
+import { MemcachedRepository } from "../../repository";
 import { RetrieveActionInput } from "@database/types";
 
 export class RetrieveAction extends Action {
@@ -8,9 +8,14 @@ export class RetrieveAction extends Action {
   }
 
   protected async action<T = any>({ key }: RetrieveActionInput): Promise<T | undefined> {
-    const value = await RedisCacheRepository._client?.get(key);
-    if (value) {
-      return JSON.parse(value)
-    };
+    return new Promise<T | undefined>((resolve, reject) => {
+      MemcachedRepository._client.get(key, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data ? JSON.parse(data) : undefined);
+        }
+      });
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Action, ICacheRepository } from "@database/interfaces";
-import { RedisCacheRepository } from "../../repository";
+import { MemcachedRepository } from "../../repository";
 import { InvalidateActionInput } from "@database/types";
 
 export class InvalidateAction extends Action<InvalidateActionInput> {
@@ -7,6 +7,14 @@ export class InvalidateAction extends Action<InvalidateActionInput> {
     super(repository)
   }
   protected async action({ key }: InvalidateActionInput): Promise<void> {
-    await RedisCacheRepository._client.expire(key, 1);
+    return new Promise<void>((resolve, reject) => {
+      MemcachedRepository._client.touch(key, 1, (err: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
   }
 }

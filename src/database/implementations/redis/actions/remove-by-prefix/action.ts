@@ -1,5 +1,5 @@
 import { Action, ICacheRepository } from "@database/interfaces";
-import { RedisCacheRepository } from "../../redis.repository";
+import { RedisCacheRepository } from "../../repository";
 import { RemoveByPrefixActionInput } from "@database/types";
 
 export class RemoveByPrefixAction extends Action<RemoveByPrefixActionInput> {

@@ -1298,6 +1298,13 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
+"@types/memcached@^2.2.10":
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/@types/memcached/-/memcached-2.2.10.tgz#113f9e3a451d6b5e0a3822e06d9feb52e63e954a"
+  integrity sha512-AM9smvZN55Gzs2wRrqeMHVP7KE8KWgCJO/XL5yCly2xF6EKa4YlbpK+cLSAH4NG/Ah64HrlegmGqW8kYws7Vxg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/minimist@^1.2.0":
   version "1.2.5"
   resolved "https://registry.npmjs.org/@types/minimist/-/minimist-1.2.5.tgz"
@@ -2126,6 +2133,11 @@ config-chain@^1.1.11:
   dependencies:
     ini "^1.3.4"
     proto-list "~1.2.1"
+
+connection-parse@0.0.x:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/connection-parse/-/connection-parse-0.0.7.tgz#18e7318aab06a699267372b10c5226d25a1c9a69"
+  integrity sha512-bTTG28diWg7R7/+qE5NZumwPbCiJOT8uPdZYu674brDjBWQctbaQbYlDKhalS+4i5HxIx+G8dZsnBHKzWpp01A==
 
 console-control-strings@^1.1.0:
   version "1.1.0"
@@ -3299,6 +3311,14 @@ has-unicode@^2.0.1:
   resolved "https://registry.npmjs.org/has-unicode/-/has-unicode-2.0.1.tgz"
   integrity sha512-8Rf9Y83NBReMnx0gFzA8JImQACstCYWUplepDa9xprwwtmgEZUF0h/i5xSA625zB/I37EtrswSST6OXxwaaIJQ==
 
+hashring@3.2.x:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/hashring/-/hashring-3.2.0.tgz#fda4efde8aa22cdb97fb1d2a65e88401e1c144ce"
+  integrity sha512-xCMovURClsQZ+TR30icCZj+34Fq1hs0y6YCASD6ZqdRfYRybb5Iadws2WS+w09mGM/kf9xyA5FCdJQGcgcraSA==
+  dependencies:
+    connection-parse "0.0.x"
+    simple-lru-cache "0.0.x"
+
 hasown@^2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/hasown/-/hasown-2.0.1.tgz"
@@ -3756,6 +3776,13 @@ istanbul-reports@^3.1.3:
   dependencies:
     html-escaper "^2.0.0"
     istanbul-lib-report "^3.0.0"
+
+jackpot@>=0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/jackpot/-/jackpot-0.0.6.tgz#3cff064285cbf66f4eab2593c90bce816a821849"
+  integrity sha512-rbWXX+A9ooq03/dfavLg9OXQ8YB57Wa7PY5c4LfU3CgFpwEhhl3WyXTQVurkaT7zBM5I9SSOaiLyJ4I0DQmC0g==
+  dependencies:
+    retry "0.6.0"
 
 jackspeak@^2.3.5:
   version "2.3.6"
@@ -4595,6 +4622,14 @@ marked@^12.0.0:
   version "12.0.1"
   resolved "https://registry.npmjs.org/marked/-/marked-12.0.1.tgz"
   integrity sha512-Y1/V2yafOcOdWQCX0XpAKXzDakPOpn6U0YLxTJs3cww6VxOzZV1BTOOYWLvH3gX38cq+iLwljHHTnMtlDfg01Q==
+
+memcached@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/memcached/-/memcached-2.2.2.tgz#68f86ccfd84bcf93cc25ed46d6d7fc0c7521c9d5"
+  integrity sha512-lHwUmqkT9WdUUgRsAvquO4xsKXYaBd644Orz31tuth+w/BIfFNuJMWwsG7sa7H3XXytaNfPTZ5R/yOG3d9zJMA==
+  dependencies:
+    hashring "3.2.x"
+    jackpot ">=0.0.6"
 
 meow@^12.0.1:
   version "12.1.1"
@@ -5785,6 +5820,11 @@ restore-cursor@^3.1.0:
     onetime "^5.1.0"
     signal-exit "^3.0.2"
 
+retry@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/retry/-/retry-0.6.0.tgz#1c010713279a6fd1e8def28af0c3ff1871caa537"
+  integrity sha512-RgncoxLF1GqwAzTZs/K2YpZkWrdIYbXsmesdomi+iPilSzjUyr/wzNIuteoTVaWokzdwZIJ9NHRNQa/RUiOB2g==
+
 retry@^0.12.0:
   version "0.12.0"
   resolved "https://registry.npmjs.org/retry/-/retry-0.12.0.tgz"
@@ -5947,6 +5987,11 @@ sigstore@^2.2.0:
     "@sigstore/sign" "^2.2.3"
     "@sigstore/tuf" "^2.3.1"
     "@sigstore/verify" "^1.1.0"
+
+simple-lru-cache@0.0.x:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/simple-lru-cache/-/simple-lru-cache-0.0.2.tgz#d59cc3a193c1a5d0320f84ee732f6e4713e511dd"
+  integrity sha512-uEv/AFO0ADI7d99OHDmh1QfYzQk/izT1vCmu/riQfh7qjBVUUgRT87E5s5h7CxWCA/+YoZerykpEthzVrW3LIw==
 
 sisteransi@^1.0.5:
   version "1.0.5"
@@ -6694,6 +6739,7 @@ wordwrap@^1.0.0:
   integrity sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
