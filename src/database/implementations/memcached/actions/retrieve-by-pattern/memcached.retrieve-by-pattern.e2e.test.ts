@@ -3,17 +3,15 @@ import { ICacheRepository, RetrieveByPatternActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
-import { Redis } from "ioredis";
 import { RetrieveByPatternAction } from "./action";
+import Memcached from "memcached";
 
-describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
-  let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: RetrieveByPatternAction
+describe('MEMCACHED RETRIEVE BY PATTERN ACTION', () => {
+  let repository: ICacheRepository<AdaptersEnum.MEMCACHED, Memcached>;
 
   beforeAll(async () => {
-    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
-      host: process.env.REDIS_HOST as string,
-      port: Number(process.env.REDIS_PORT),
+    repository = await initializeTestRepository(AdaptersEnum.MEMCACHED, {
+      location: `${process.env.MEMCACHED_HOST}:${process.env.MEMCACHED_PORT}`,
     })
   })
 
@@ -21,6 +19,7 @@ describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
     await disconnectTestRepository(repository);
   })
 
+  let action: RetrieveByPatternAction
   beforeEach(async () => {
     action = new RetrieveByPatternAction(repository);
   })
@@ -35,7 +34,7 @@ describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
 
   it.each([
     {
-      should: 'Should retrieve by pattern cache successfuly in Redis',
+      should: 'Should retrieve by pattern cache successfuly in Memcached',
       input,
       setup: async () => {
         await Promise.all(values.map(({ key, value }) => repository.save({ key, value })));

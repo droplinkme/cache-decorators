@@ -3,23 +3,23 @@ import { ICacheRepository, RetrieveOrSaveActionInput, SaveActionInput } from "@d
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
-import { Redis } from "ioredis";
 import { RetrieveOrSaveAction } from "./action";
+import Memcached from "memcached";
 
-describe('REDIS RETRIEVE OR SAVE ACTION', () => {
-  let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: RetrieveOrSaveAction
+describe('MEMCACHED RETRIEVE OR SAVE ACTION', () => {
+  let repository: ICacheRepository<AdaptersEnum.MEMCACHED, Memcached>;
 
   beforeAll(async () => {
-    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
-      host: process.env.REDIS_HOST as string,
-      port: Number(process.env.REDIS_PORT),
+    repository = await initializeTestRepository(AdaptersEnum.MEMCACHED, {
+      location: `${process.env.MEMCACHED_HOST}:${process.env.MEMCACHED_PORT}`,
     })
   })
 
   afterAll(async () => {
     await disconnectTestRepository(repository);
   })
+
+  let action: RetrieveOrSaveAction
 
   beforeEach(async () => {
     action = new RetrieveOrSaveAction(repository);

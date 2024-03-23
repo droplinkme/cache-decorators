@@ -3,17 +3,15 @@ import { ICacheRepository, SaveActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
-import { Redis } from "ioredis";
 import { SaveAction } from "./action";
+import Memcached from "memcached";
 
-describe('REDIS SAVE ACTION', () => {
-  let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: SaveAction
+describe('MEMCACHED SAVE ACTION', () => {
+  let repository: ICacheRepository<AdaptersEnum.MEMCACHED, Memcached>;
 
   beforeAll(async () => {
-    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
-      host: process.env.REDIS_HOST as string,
-      port: Number(process.env.REDIS_PORT),
+    repository = await initializeTestRepository(AdaptersEnum.MEMCACHED, {
+      location: `${process.env.MEMCACHED_HOST}:${process.env.MEMCACHED_PORT}`,
     })
   })
 
@@ -21,6 +19,7 @@ describe('REDIS SAVE ACTION', () => {
     await disconnectTestRepository(repository);
   })
 
+  let action: SaveAction
   beforeEach(async () => {
     action = new SaveAction(repository);
   })
@@ -39,7 +38,7 @@ describe('REDIS SAVE ACTION', () => {
 
   it.each([
     {
-      should: 'Should save cache successfuly in Redis without ttl',
+      should: 'Should save cache successfuly in Memcached without ttl',
       input: { ...input, ttl: undefined },
       setup: async () => { },
       expected: async (result: any) => {
@@ -49,7 +48,7 @@ describe('REDIS SAVE ACTION', () => {
       }
     },
     {
-      should: 'Should save cache successfuly in Redis with ttl',
+      should: 'Should save cache successfuly in Memcached with ttl',
       input,
       setup: async () => { },
       expected: async (result: any) => {

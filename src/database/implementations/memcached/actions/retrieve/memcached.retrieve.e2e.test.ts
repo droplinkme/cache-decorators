@@ -1,19 +1,17 @@
 import { AdaptersEnum } from "@database/enums"
-import { ICacheRepository, RemoveActionInput } from "@database/index"
+import { ICacheRepository, RetrieveActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
-import { Redis } from "ioredis";
-import { RemoveAction } from "./action";
+import { RetrieveAction } from "./action";
+import Memcached from "memcached";
 
-describe('REDIS REMOVE ACTION', () => {
-  let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: RemoveAction
+describe('MEMCACHED RETRIEVE ACTION', () => {
+  let repository: ICacheRepository<AdaptersEnum.MEMCACHED, Memcached>;
 
   beforeAll(async () => {
-    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
-      host: process.env.REDIS_HOST as string,
-      port: Number(process.env.REDIS_PORT),
+    repository = await initializeTestRepository(AdaptersEnum.MEMCACHED, {
+      location: `${process.env.MEMCACHED_HOST}:${process.env.MEMCACHED_PORT}`,
     })
   })
 
@@ -21,27 +19,31 @@ describe('REDIS REMOVE ACTION', () => {
     await disconnectTestRepository(repository);
   })
 
+  let action: RetrieveAction
+
   beforeEach(async () => {
-    action = new RemoveAction(repository);
+    action = new RetrieveAction(repository);
   })
 
   const value = { id: randomUUID() };
 
-  const input: RemoveActionInput = {
+  const input: RetrieveActionInput = {
     key: randomUUID(),
+  }
+
+  const output = {
+    ...value,
   }
 
   it.each([
     {
-      should: 'Should remove cache successfuly in Redis',
+      should: 'Should retrieve cache successfuly in Redis',
       input,
       setup: async () => {
         await repository.save({ key: input.key, value })
       },
       expected: async (result: any) => {
-        const value = await repository.retrieve({ key: input.key })
-        expect(value).toBeUndefined()
-        expect(result).toBeUndefined()
+        expect(result).toStrictEqual(output)
       }
     },
   ])('$should', async ({ expected, input, setup }) => {

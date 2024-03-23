@@ -3,23 +3,23 @@ import { ICacheRepository } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
-import { Redis } from "ioredis";
 import { FlushAllAction } from "./action";
+import Memcached from "memcached";
 
-describe('REDIS FLUSH ALL ACTION', () => {
-  let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: FlushAllAction
+describe('MEMCACHED FLUSH ALL ACTION', () => {
+  let repository: ICacheRepository<AdaptersEnum.MEMCACHED, Memcached>;
 
   beforeAll(async () => {
-    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
-      host: process.env.REDIS_HOST as string,
-      port: Number(process.env.REDIS_PORT),
+    repository = await initializeTestRepository(AdaptersEnum.MEMCACHED, {
+      location: `${process.env.MEMCACHED_HOST}:${process.env.MEMCACHED_PORT}`,
     })
   })
 
   afterAll(async () => {
     await disconnectTestRepository(repository);
   })
+
+  let action: FlushAllAction
 
   beforeEach(async () => {
     action = new FlushAllAction(repository);
@@ -30,7 +30,7 @@ describe('REDIS FLUSH ALL ACTION', () => {
 
   it.each([
     {
-      should: 'Should flush all cache successfuly in Redis',
+      should: 'Should flush all cache successfuly in Memcached',
       setup: async () => {
         await Promise.all(values.map(({ key, value }) => repository.save({ key, value })));
       },

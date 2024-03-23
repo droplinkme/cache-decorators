@@ -15,6 +15,7 @@ export class RemoveByPrefixAction extends Action<RemoveByPrefixActionInput> {
         } else {
           const keys = Object.keys(items);
           const keysToDelete = keys.filter((key) => key.startsWith(prefix));
+          console.log({ items, keys, keysToDelete })
           keysToDelete.forEach((key) => {
             MemcachedRepository._client.del(key, (deleteErr: any) => {
               if (deleteErr) {

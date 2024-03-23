@@ -3,23 +3,23 @@ import { ICacheRepository, InvalidateActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
-import { Redis } from "ioredis";
 import { InvalidateAction } from "./action";
+import Memcached from "memcached";
 
-describe('REDIS INVALIDATE ACTION', () => {
-  let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
-  let action: InvalidateAction
+describe('MEMCACHED INVALIDATE ACTION', () => {
+  let repository: ICacheRepository<AdaptersEnum.MEMCACHED, Memcached>;
 
   beforeAll(async () => {
-    repository = await initializeTestRepository(AdaptersEnum.REDIS, {
-      host: process.env.REDIS_HOST as string,
-      port: Number(process.env.REDIS_PORT),
+    repository = await initializeTestRepository(AdaptersEnum.MEMCACHED, {
+      location: `${process.env.MEMCACHED_HOST}:${process.env.MEMCACHED_PORT}`,
     })
   })
 
   afterAll(async () => {
     await disconnectTestRepository(repository);
   })
+
+  let action: InvalidateAction
 
   beforeEach(async () => {
     action = new InvalidateAction(repository);
@@ -33,7 +33,7 @@ describe('REDIS INVALIDATE ACTION', () => {
 
   it.each([
     {
-      should: 'Should invalidate cache successfuly in Redis',
+      should: 'Should invalidate cache successfuly in Memcached',
       input,
       setup: async () => {
         await repository.save({ key: input.key, value })
