@@ -31,8 +31,14 @@ import { DataSource, AdapterEnum } from "@droplink/cache-decorators";
 DataSource.initialize(AdapterEnum.REDIS, {
   host: process.env.REDIS_HOST, // Set your caching host
   port: Number(process.env.REDIS_PORT), // Set your caching port
+  // ...other options
 });
 ```
+
+**Note:** Install Dependencies: Depending on the adapter (enum) chosen, you may need to install the corresponding library for the caching strategy. For example, if you choose the REDIS adapter, you need to install the ioredis library.
+
+- AdapterEnum.REDIS: `npm install ioredis`
+- Other adapters: in progress
 
 **Initialize Custom Repository**
 

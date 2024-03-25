@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import { DataSource } from "@database/datasource";
 import { CacheInvalidate, CacheRemove, CacheRemoveByPrefix, CacheRetrieve, CacheSave } from "@core/common";
+import { AdaptersEnum } from "src";
 
 export const MOCK_KEY = randomUUID()
 export const OUTPUT_KEY = randomUUID()
@@ -18,10 +19,9 @@ export type Output = {
 
 export class UseCase {
   constructor() {
-    new DataSource().initialize({
-      adpter: 'ioredis',
+    DataSource.initialize<AdaptersEnum.REDIS>(AdaptersEnum.REDIS, {
       host: process.env.HOST as string,
-      port: Number(process.env.PORT)
+      port: Number(process.env.PORT),
     })
   }
 
@@ -31,7 +31,7 @@ export class UseCase {
   }
 
   @CacheSave<Input, Output>({
-    custom_key: (input, output) => `${MOCK_KEY}/${input.id}/${output?.key}`,
+    key: (input, output) => `${MOCK_KEY}/${input.id}/${output?.key}`,
   })
   async saveWithCustomKey(input: Input): Promise<Output> {
     return { ...input, key: OUTPUT_KEY, success: true };
@@ -43,7 +43,7 @@ export class UseCase {
   }
 
   @CacheRetrieve<Input & { key: string }>({
-    custom_key: (input) => `${MOCK_KEY}/${input.id}/${input?.key}`,
+    key: (input) => `${MOCK_KEY}/${input.id}/${input?.key}`,
   })
   async retrieveWithCustomKey(input: Input & { key: string }): Promise<Output> {
     return { ...input, success: true };
@@ -60,7 +60,7 @@ export class UseCase {
   }
 
   @CacheRemove<Input & { key: string }>({
-    custom_key: (input) => `${MOCK_KEY}/${input.id}/${input.key}`,
+    key: (input) => `${MOCK_KEY}/${input.id}/${input.key}`,
   })
   async removeWithCustomKey(input: Input & { key: string }): Promise<Output> {
     return { ...input, success: true };
@@ -72,7 +72,7 @@ export class UseCase {
   }
 
   @CacheRemoveByPrefix<Input & { key: string }>({
-    custom_key: (input) => `${MOCK_KEY}/${input.id}/${input.key}`,
+    key: (input) => `${MOCK_KEY}/${input.id}/${input.key}`,
   })
   async removeByPrefixWithCustomKey(input: Input & { key: string }): Promise<Output> {
     return { ...input, success: true };
@@ -84,7 +84,7 @@ export class UseCase {
   }
 
   @CacheInvalidate<Input & { key: string }>({
-    custom_key: (input) => `${MOCK_KEY}/${input.id}/${input.key}`,
+    key: (input) => `${MOCK_KEY}/${input.id}/${input.key}`,
   })
   async invalidateWithCustomKey(input: Input & { key: string }): Promise<Output> {
     return { ...input, success: true };
