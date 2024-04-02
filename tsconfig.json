@@ -33,5 +33,5 @@
       "@database/*": ["./src/database/*"]
     }
   },
-  "include": ["./src", "./index.ts", "./src/fake.index.ts", "./sample"]
+  "include": ["./src", "./index.ts", "./fake.ts", "./sample"]
 }

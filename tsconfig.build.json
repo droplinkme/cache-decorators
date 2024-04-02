@@ -4,10 +4,11 @@
     "node_modules",
     "test",
     "dist",
+    "built",
     "coverage",
     "**/*spec.ts",
     "**/*mock.ts",
-    "**/*fake.ts",
+    "src/**/*fake.ts",
     "sample"
   ]
 }
