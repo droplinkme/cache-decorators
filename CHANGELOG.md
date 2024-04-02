@@ -1,3 +1,10 @@
+## [1.5.17](https://github.com/droplinkme/cache-decorators/compare/v1.5.16...v1.5.17) (2024-04-02)
+
+
+### Bug Fixes
+
+* export fake repository to make a mock repositories ([75029b9](https://github.com/droplinkme/cache-decorators/commit/75029b9176278d7efd7a43d48dbbc8c01ac6f29e))
+
 ## [1.5.16](https://github.com/droplinkme/cache-decorators/compare/v1.5.15...v1.5.16) (2024-03-25)
 
 
