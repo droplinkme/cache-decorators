@@ -1,3 +1,10 @@
+## [1.5.18](https://github.com/droplinkme/cache-decorators/compare/v1.5.17...v1.5.18) (2024-04-02)
+
+
+### Bug Fixes
+
+* change export for fakes ([c788d22](https://github.com/droplinkme/cache-decorators/commit/c788d223b28f61b77c6f3926af1cda08980a490c))
+
 ## [1.5.17](https://github.com/droplinkme/cache-decorators/compare/v1.5.16...v1.5.17) (2024-04-02)
 
 
