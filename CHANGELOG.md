@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/droplinkme/cache-decorators/compare/v1.5.18...v1.6.0) (2024-04-02)
+
+
+### Features
+
+* add new attribute to make a key as hashable and export createHashKey ([a0b1cfe](https://github.com/droplinkme/cache-decorators/commit/a0b1cfeaf42309f4d781b805030c8a8d81f157e1))
+
 ## [1.5.18](https://github.com/droplinkme/cache-decorators/compare/v1.5.17...v1.5.18) (2024-04-02)
 
 
