@@ -2,6 +2,7 @@ import { DataSource } from "@database/datasource"
 import { Input, MOCK_KEY, MOCK_TTL, Mock, OUTPUT_KEY, Output } from "./mock"
 import { FakeCacheRepository } from "@database/fake/repository.fake"
 import { randomUUID } from "crypto"
+import { createHashedKey } from "@core/utils/create-hash.util"
 
 describe('#CacheRetrieve', () => {
   DataSource.setCustomRepository(new FakeCacheRepository());
@@ -26,6 +27,22 @@ describe('#CacheRetrieve', () => {
         const output = await fn(input)
         expect(retrieveOrSave).toHaveBeenCalledWith({
           key: MOCK_KEY,
+          fn: expect.any(Function),
+          ttl: undefined,
+          no_cache: undefined
+        })
+        expect(output).toEqual({
+          ...input, key: OUTPUT_KEY, success: true
+        })
+      }
+    },
+    {
+      should: 'Retrieve value with hashable key succesfuly',
+      fn: mock.onlyHashableKey,
+      expected: async (fn: (input: Input) => Promise<Output>) => {
+        const output = await fn(input)
+        expect(retrieveOrSave).toHaveBeenCalledWith({
+          key: createHashedKey(MOCK_KEY),
           fn: expect.any(Function),
           ttl: undefined,
           no_cache: undefined

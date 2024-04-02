@@ -1,1 +1,1 @@
-export * from './trait.util'
+export * from './create-hash.util'

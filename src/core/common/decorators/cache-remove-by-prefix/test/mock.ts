@@ -18,6 +18,11 @@ export class Mock {
     return { ...input, success: true };
   }
 
+  @CacheRemoveByPrefix({ key: MOCK_KEY, hashable_key: true })
+  async onlyHashableKey(input: Input): Promise<Output> {
+    return { ...input, success: true };
+  }
+
   @CacheRemoveByPrefix<Input>({ key: (input) => `${MOCK_KEY}/${input.id}` })
   async withCustomKey(input: Input): Promise<Output> {
     return { ...input, success: true };

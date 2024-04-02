@@ -1,6 +1,7 @@
 import { Action, Input } from "@core/common/types";
 import { createCacheDecorator } from "../create-cache-decorator";
 import { ICacheRepository } from "@database/interfaces/cache.interface";
+import { createHashedKey } from "@core/utils/create-hash.util";
 
 /**
  * Decorator that removes cache entries by based on predefined conditions.
@@ -41,7 +42,9 @@ export function CacheRemove<I = { [key: string]: any }>(input: Omit<Input<I>, 't
    */
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository, }) => {
     const output = await method.apply(instance, args);
-    await repository.remove({ key: key as string });
+    await repository.remove({
+      key: input.hashable_key ? createHashedKey(key) : key as string,
+    });
     return output;
   };
 

@@ -2,6 +2,7 @@ import { DataSource } from "@database/datasource"
 import { Input, MOCK_KEY, Mock, Output } from "./mock"
 import { FakeCacheRepository } from "@database/fake/repository.fake"
 import { randomUUID } from "crypto"
+import { createHashedKey } from "@core/utils/create-hash.util"
 
 describe('#CacheRemoveByPrefix', () => {
   DataSource.setCustomRepository(new FakeCacheRepository());
@@ -19,6 +20,17 @@ describe('#CacheRemoveByPrefix', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         expect(repository.removeByPrefix).toHaveBeenCalledWith({ prefix: MOCK_KEY })
+        expect(output).toEqual({
+          ...input, success: true
+        })
+      }
+    },
+    {
+      should: 'Remove by prefix value with hashable key succesfuly',
+      fn: mock.onlyHashableKey,
+      expected: async (fn: (input: Input) => Promise<Output>) => {
+        const output = await fn(input)
+        expect(repository.removeByPrefix).toHaveBeenCalledWith({ prefix: createHashedKey(MOCK_KEY) })
         expect(output).toEqual({
           ...input, success: true
         })

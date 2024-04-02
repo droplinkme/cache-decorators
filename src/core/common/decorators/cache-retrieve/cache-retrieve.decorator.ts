@@ -1,6 +1,7 @@
 import { Action, Input } from "@core/common/types";
 import { createCacheDecorator } from "../create-cache-decorator";
 import { ICacheRepository } from "@database/interfaces/cache.interface";
+import { createHashedKey } from "@core/utils/create-hash.util";
 
 /**
  * Decorator that retrieves cache entries based on predefined conditions.
@@ -42,7 +43,7 @@ export function CacheRetrieve<I = { [key: string]: any }>(input: Input<I>): Meth
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository }) => {
     const fn = () => method.apply(instance, args);
     return await repository.retrieveOrSave({
-      key: key as string,
+      key: input.hashable_key ? createHashedKey(key) : key as string,
       fn,
       ttl: input.ttl,
       no_cache: input.no_cache

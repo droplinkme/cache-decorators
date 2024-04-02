@@ -21,6 +21,11 @@ export class Mock {
     return { ...input, key: OUTPUT_KEY, success: true };
   }
 
+  @CacheSave({ key: MOCK_KEY, hashable_key: true })
+  async onlyHashableKey(input: Input): Promise<Output> {
+    return { ...input, key: OUTPUT_KEY, success: true };
+  }
+
   @CacheSave({ key: MOCK_KEY, ttl: MOCK_TTL })
   async keyAndTtl(input: Input): Promise<Output> {
     return { ...input, key: OUTPUT_KEY, success: true };

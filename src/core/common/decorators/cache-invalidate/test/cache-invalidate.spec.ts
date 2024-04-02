@@ -2,6 +2,7 @@ import { DataSource } from "@database/datasource"
 import { Input, MOCK_KEY, Mock, Output } from "./mock"
 import { FakeCacheRepository } from "@database/fake/repository.fake"
 import { randomUUID } from "crypto"
+import { createHashedKey } from "@core/utils/create-hash.util"
 
 describe('#CacheInvalidate', () => {
   DataSource.setCustomRepository(new FakeCacheRepository());
@@ -19,6 +20,17 @@ describe('#CacheInvalidate', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         expect(repository.invalidate).toHaveBeenCalledWith({ key: MOCK_KEY })
+        expect(output).toEqual({
+          ...input, success: true
+        })
+      }
+    },
+    {
+      should: 'Invalidate value with hashable key succesfuly',
+      fn: mock.onlyHashableKey,
+      expected: async (fn: (input: Input) => Promise<Output>) => {
+        const output = await fn(input)
+        expect(repository.invalidate).toHaveBeenCalledWith({ key: createHashedKey(MOCK_KEY) })
         expect(output).toEqual({
           ...input, success: true
         })
