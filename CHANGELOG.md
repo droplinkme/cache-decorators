@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/droplinkme/cache-decorators/compare/v1.6.0...v1.7.0) (2024-04-07)
+
+
+### Features
+
+* add new attribute to make a fallback cache value ([641cef7](https://github.com/droplinkme/cache-decorators/commit/641cef7445e20b4fa551568f76d5bf9d59453485))
+
 # [1.6.0](https://github.com/droplinkme/cache-decorators/compare/v1.5.18...v1.6.0) (2024-04-02)
 
 
