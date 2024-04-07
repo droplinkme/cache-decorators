@@ -5,6 +5,8 @@ import { disconnectTestRepository, initializeTestRepository } from "@database/fa
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { RetrieveByPatternAction } from "./action";
+import { RedisCacheRepository } from "../../redis.repository";
+
 
 describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;

@@ -46,7 +46,8 @@ export function CacheRetrieve<I = { [key: string]: any }>(input: Input<I>): Meth
       key: input.hashable_key ? createHashedKey(key) : key as string,
       fn,
       ttl: input.ttl,
-      no_cache: input.no_cache
+      no_cache: input.no_cache,
+      fallback: input.fallback
     });
   };
 

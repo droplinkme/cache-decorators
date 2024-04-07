@@ -5,6 +5,7 @@ import { disconnectTestRepository, initializeTestRepository } from "@database/fa
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { SaveAction } from "./action";
+import { CachePrefixEnum } from "@core/enums";
 
 describe('REDIS SAVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
@@ -33,6 +34,8 @@ describe('REDIS SAVE ACTION', () => {
     ttl: 60
   }
 
+  const fallback_key = `${CachePrefixEnum.FALLBACK}/${input.key}`
+
   const output = {
     ...value,
   }
@@ -46,6 +49,18 @@ describe('REDIS SAVE ACTION', () => {
         expect(result).toStrictEqual(output)
         const cache = await repository.retrieve({ key: input.key });
         expect(cache).toStrictEqual(result);
+      }
+    },
+    {
+      should: 'Should save cache successfuly in Redis with fallback',
+      input: { ...input, fallback: true },
+      setup: async () => { },
+      expected: async (result: any) => {
+        expect(result).toStrictEqual(output)
+        const cache = await repository.retrieve({ key: input.key });
+        const fallback_cache = await repository.retrieve({ key: fallback_key });
+        expect(cache).toStrictEqual(result);
+        expect(fallback_cache).toStrictEqual(result);
       }
     },
     {

@@ -47,7 +47,8 @@ export function CacheSave<I = any, O = any>(input: Omit<Input<I, O>, 'no_cache'>
     await repository.save<O>({
       key: input.hashable_key ? createHashedKey(key) : key as string,
       value: output,
-      ttl: input.ttl
+      ttl: input.ttl,
+      fallback: input.fallback
     });
     return output;
   };

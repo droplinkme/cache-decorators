@@ -2,6 +2,7 @@ import { Action, Input } from "@core/common/types";
 import { createCacheDecorator } from "../create-cache-decorator";
 import { ICacheRepository } from "@database/interfaces/cache.interface";
 import { createHashedKey } from "@core/utils/create-hash.util";
+import { CachePrefixEnum } from "@core/enums";
 
 /**
  * Decorator that removes cache entries by prefix based on predefined conditions.
@@ -42,7 +43,9 @@ export function CacheRemoveByPrefix<I = { [key: string]: any }>(input: Omit<Inpu
    */
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository, }) => {
     const output = await method.apply(instance, args);
-    await repository.removeByPrefix({ prefix: input.hashable_key ? createHashedKey(key) : key as string, });
+    const use_key = input.hashable_key ? createHashedKey(key) : key as string;
+    await repository.removeByPrefix({ prefix: use_key });
+    if (input.fallback) await repository.removeByPrefix({ prefix: `${CachePrefixEnum.FALLBACK}/${use_key}` });
     return output;
   };
   return createCacheDecorator<I>(input, action);

@@ -34,7 +34,7 @@ import { createHashedKey } from "@core/utils/create-hash.util";
  * }
  * ```
  */
-export function CacheInvalidate<I = { [key: string]: any }>(input: Omit<Input<I>, 'ttl' | 'no_cache'>): MethodDecorator {
+export function CacheInvalidate<I = { [key: string]: any }>(input: Omit<Input<I>, 'ttl' | 'no_cache' | 'fallback'>): MethodDecorator {
   /**
    * Action function that retrieves cache entries.
    * 
@@ -42,7 +42,8 @@ export function CacheInvalidate<I = { [key: string]: any }>(input: Omit<Input<I>
    */
   const action: Action<I, any, ICacheRepository> = async ({ instance, key, method, args, repository }) => {
     const output = await method.apply(instance, args);
-    await repository.invalidate({ key: input.hashable_key ? createHashedKey(key) : key as string, });
+    const use_key = input.hashable_key ? createHashedKey(key) : key as string;
+    await repository.invalidate({ key: use_key });
     return output;
   };
   return createCacheDecorator<I>(input, action);

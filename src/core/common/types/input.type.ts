@@ -29,4 +29,10 @@ export type Input<I = any, O = any> = {
     * @type {boolean}
     */
   hashable_key?: boolean;
+
+  /**
+    * Determines if the cache store and returns a fallback for the last cached value if any error.
+    * @type {boolean}
+    */
+  fallback?: boolean
 }

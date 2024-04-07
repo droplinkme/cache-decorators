@@ -18,6 +18,11 @@ export class Mock {
     return { ...input, success: true };
   }
 
+  @CacheRemove({ key: MOCK_KEY, fallback: true })
+  async onlyKeyAndFallback(input: Input): Promise<Output> {
+    return { ...input, success: true };
+  }
+
   @CacheRemove({ key: MOCK_KEY, hashable_key: true })
   async onlyHashableKey(input: Input): Promise<Output> {
     return { ...input, success: true };

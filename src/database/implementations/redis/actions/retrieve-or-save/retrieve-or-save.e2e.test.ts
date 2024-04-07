@@ -5,6 +5,7 @@ import { disconnectTestRepository, initializeTestRepository } from "@database/fa
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { RetrieveOrSaveAction } from "./action";
+import { CachePrefixEnum } from "@core/enums";
 
 describe('REDIS RETRIEVE OR SAVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
@@ -38,6 +39,8 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
     no_cache: false
   }
 
+  const fallback_key = `${CachePrefixEnum.FALLBACK}/${input.key}`;
+
   const output = {
     ...value,
   }
@@ -57,10 +60,27 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       }
     },
     {
-      should: 'Should execute fn and save cache & returns successfuly in Redis',
-      input,
+      should: 'Should execute fn and save cache & returns successfuly in Redis and save fallback',
+      input: { ...input, fallback: true },
       setup: async () => {
         await repository.remove({ key: input.key });
+        await repository.remove({ key: fallback_key });
+      },
+      expected: async (result: any) => {
+        const cache = await repository.retrieve({ key: input.key });
+        const fallback_cache = await repository.retrieve({ key: fallback_key });
+        expect(fn).toHaveBeenCalledTimes(1);
+        expect(result).toStrictEqual(output)
+        expect(cache).toStrictEqual(result);
+        expect(fallback_cache).toStrictEqual(result);
+      }
+    },
+    {
+      should: 'Should execute fn and save cache & returns successfuly in Redis when no_cache is true',
+      input: { ...input, no_cache: true },
+      setup: async () => {
+        await repository.remove({ key: input.key });
+        await repository.remove({ key: fallback_key });
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -70,16 +90,41 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       }
     },
     {
-      should: 'Should execute fn and save cache & returns successfuly in Redis when no_cache is true',
-      input: { ...input, no_cache: true },
+      should: 'Should return fallback value cached when fallback is true have any throw error',
+      input: { ...input, fallback: true },
       setup: async () => {
         await repository.remove({ key: input.key });
+        await repository.save<typeof value>({ key: `${CachePrefixEnum.FALLBACK}/${input.key}`, value });
+        fn.mockImplementationOnce(() => {
+          throw new Error("Some Error")
+        })
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
+        const fallback_cache = await repository.retrieve({ key: `${CachePrefixEnum.FALLBACK}/${input.key}` });
         expect(fn).toHaveBeenCalledTimes(1);
         expect(result).toStrictEqual(output)
-        expect(cache).toStrictEqual(result);
+        expect(fallback_cache).toStrictEqual(output)
+        expect(cache).toBeUndefined();
+      }
+    },
+    {
+      should: 'Should throw error if have any error and fallback is false or undefined',
+      input: { ...input },
+      setup: async () => {
+        await repository.remove({ key: input.key });
+        await repository.remove({ key: fallback_key });
+        fn.mockImplementationOnce(() => {
+          throw new Error("Some Error")
+        })
+      },
+      expected: async (result: any) => {
+        const cache = await repository.retrieve({ key: input.key });
+        const fallback_cache = await repository.retrieve({ key: `${CachePrefixEnum.FALLBACK}/${input.key}` });
+        expect(fn).toHaveBeenCalledTimes(1);
+        expect(result).toBeInstanceOf(Error)
+        expect(fallback_cache).toBeUndefined()
+        expect(cache).toBeUndefined();
       }
     },
   ])('$should', async ({ expected, input, setup }) => {

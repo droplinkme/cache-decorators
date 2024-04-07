@@ -3,6 +3,7 @@ import { Input, MOCK_KEY, Mock, Output } from "./mock"
 import { FakeCacheRepository } from "@database/fake/repository.fake"
 import { randomUUID } from "crypto"
 import { createHashedKey } from "@core/utils/create-hash.util"
+import { CachePrefixEnum } from "@core/enums"
 
 describe('#CacheRemove', () => {
   DataSource.setCustomRepository(new FakeCacheRepository());
@@ -20,6 +21,18 @@ describe('#CacheRemove', () => {
       expected: async (fn: (input: Input) => Promise<Output>) => {
         const output = await fn(input)
         expect(repository.remove).toHaveBeenCalledWith({ key: MOCK_KEY })
+        expect(output).toEqual({
+          ...input, success: true
+        })
+      }
+    },
+    {
+      should: 'Remove value and fallback succesfuly',
+      fn: mock.onlyKeyAndFallback,
+      expected: async (fn: (input: Input) => Promise<Output>) => {
+        const output = await fn(input)
+        expect(repository.remove).toHaveBeenCalledWith({ key: MOCK_KEY })
+        expect(repository.remove).toHaveBeenCalledWith({ key: `${CachePrefixEnum.FALLBACK}/${MOCK_KEY}` })
         expect(output).toEqual({
           ...input, success: true
         })

@@ -3,4 +3,5 @@ export type RetrieveOrSaveActionInput<T = any> = {
   fn: () => Promise<T>;
   ttl?: number;
   no_cache?: boolean;
+  fallback?: boolean;
 }
