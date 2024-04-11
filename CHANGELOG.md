@@ -1,3 +1,12 @@
+## [1.8.4](https://github.com/droplinkme/cache-decorators/compare/v1.8.3...v1.8.4) (2024-04-11)
+
+
+### Bug Fixes
+
+* change build to swc and module to es6 ([78fe4f0](https://github.com/droplinkme/cache-decorators/commit/78fe4f0232271d7cf6b6438068eb4d5863357eb2))
+* update prepare script command ([0fae0d4](https://github.com/droplinkme/cache-decorators/commit/0fae0d4d10556721a49aa18698d7608b6d71ee88))
+* update releaserc command build ([07d81c0](https://github.com/droplinkme/cache-decorators/commit/07d81c091d404ece4e9f22a5610dbe487984d883))
+
 ## [1.8.3](https://github.com/droplinkme/cache-decorators/compare/v1.8.2...v1.8.3) (2024-04-11)
 
 
