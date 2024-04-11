@@ -1,11 +1,12 @@
 import { AdaptersEnum } from "@database/enums"
-import { ICacheRepository, RetrieveOrSaveActionInput, SaveActionInput } from "@database/index"
+import { ICacheRepository, RetrieveOrSaveActionInput } from "@database/index"
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { RetrieveOrSaveAction } from "./action";
 import { CachePrefixEnum } from "@core/enums";
+import { describe, beforeAll, afterAll, beforeEach, it, expect, vi } from 'vitest'
 
 describe('REDIS RETRIEVE OR SAVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
@@ -28,9 +29,7 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
 
   const value = { id: randomUUID() };
 
-  const fn = jest.fn(async () => {
-    return value;
-  });
+  const fn = vi.fn(async () => { return value });
 
   const input: RetrieveOrSaveActionInput<typeof value> = {
     key: randomUUID(),
@@ -47,10 +46,12 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
 
   it.each([
     {
+      run: true,
       should: 'Should return from cache successfuly in Redis without ttl',
       input,
       setup: async () => {
         await repository.save<typeof value>({ key: input.key, value })
+        fn.mockRestore()
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -60,11 +61,13 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       }
     },
     {
+      run: true,
       should: 'Should execute fn and save cache & returns successfuly in Redis and save fallback',
       input: { ...input, fallback: true },
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.remove({ key: fallback_key });
+        fn.mockRestore()
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -76,11 +79,13 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       }
     },
     {
+      run: true,
       should: 'Should execute fn and save cache & returns successfuly in Redis when no_cache is true',
       input: { ...input, no_cache: true },
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.remove({ key: fallback_key });
+        fn.mockRestore()
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -90,11 +95,13 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       }
     },
     {
+      run: true,
       should: 'Should return fallback value cached when fallback is true have any throw error',
       input: { ...input, fallback: true },
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.save<typeof value>({ key: `${CachePrefixEnum.FALLBACK}/${input.key}`, value });
+        fn.mockRestore()
         fn.mockImplementationOnce(() => {
           throw new Error("Some Error")
         })
@@ -109,11 +116,13 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       }
     },
     {
+      run: true,
       should: 'Should throw error if have any error and fallback is false or undefined',
       input: { ...input },
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.remove({ key: fallback_key });
+        fn.mockRestore()
         fn.mockImplementationOnce(() => {
           throw new Error("Some Error")
         })
@@ -127,7 +136,8 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
         expect(cache).toBeUndefined();
       }
     },
-  ])('$should', async ({ expected, input, setup }) => {
+  ])('$should', async ({ run, expected, input, setup }) => {
+    if (!run) return;
     if (setup) await setup();
     return action.execute<typeof value>(input).then(expected).catch(expected);
   })

@@ -1,11 +1,12 @@
 import { DataSource } from "@database/datasource"
 import { Input, MOCK_KEY, Mock, Output } from "./mock"
-import { FakeCacheRepository } from "@database/fake/repository.fake"
 import { randomUUID } from "crypto"
 import { createHashedKey } from "@core/utils/create-hash.util"
+import { VitestFakeCacheRepository } from "@database/fake"
+import { describe, it, expect } from 'vitest'
 
 describe('#CacheInvalidate', () => {
-  DataSource.setCustomRepository(new FakeCacheRepository());
+  DataSource.setCustomRepository(new VitestFakeCacheRepository());
   const repository = DataSource.getRepository();
   const mock = new Mock()
 

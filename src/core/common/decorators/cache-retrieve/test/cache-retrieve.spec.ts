@@ -1,18 +1,19 @@
 import { DataSource } from "@database/datasource"
 import { Input, MOCK_KEY, MOCK_TTL, Mock, OUTPUT_KEY, Output } from "./mock"
-import { FakeCacheRepository } from "@database/fake/repository.fake"
+import { VitestFakeCacheRepository } from "@database/fake"
 import { randomUUID } from "crypto"
 import { createHashedKey } from "@core/utils/create-hash.util"
+import { describe, beforeEach, it, expect, vi, MockInstance } from 'vitest'
 
 describe('#CacheRetrieve', () => {
-  DataSource.setCustomRepository(new FakeCacheRepository());
+  DataSource.setCustomRepository(new VitestFakeCacheRepository());
   const repository = DataSource.getRepository();
   const mock = new Mock()
 
-  let retrieveOrSave: any;
+  let retrieveOrSave: MockInstance;
 
   beforeEach(() => {
-    retrieveOrSave = jest.spyOn(repository, 'retrieveOrSave');
+    retrieveOrSave = vi.spyOn(repository, 'retrieveOrSave');
   })
 
   const input: Input = {

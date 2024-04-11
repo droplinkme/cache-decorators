@@ -1,7 +1,7 @@
 import { ICacheRepository, RetrieveOrSaveActionInput } from ".."
-import { FakeResource } from "./resource.fake";
+import { JestFakeResource } from "./jest-resource.fake";
 
-export class FakeCacheRepository extends FakeResource implements ICacheRepository {
+export class JestFakeCacheRepository extends JestFakeResource implements ICacheRepository {
   constructor() {
     super()
   }

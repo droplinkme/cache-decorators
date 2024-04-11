@@ -6,6 +6,7 @@ import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { SaveAction } from "./action";
 import { CachePrefixEnum } from "@core/enums";
+import { describe, beforeAll, afterAll, beforeEach, it, expect } from 'vitest'
 
 describe('REDIS SAVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
@@ -42,6 +43,7 @@ describe('REDIS SAVE ACTION', () => {
 
   it.each([
     {
+      run: true,
       should: 'Should save cache successfuly in Redis without ttl',
       input: { ...input, ttl: undefined },
       setup: async () => { },
@@ -52,6 +54,7 @@ describe('REDIS SAVE ACTION', () => {
       }
     },
     {
+      run: true,
       should: 'Should save cache successfuly in Redis with fallback',
       input: { ...input, fallback: true },
       setup: async () => { },
@@ -64,6 +67,7 @@ describe('REDIS SAVE ACTION', () => {
       }
     },
     {
+      run: true,
       should: 'Should save cache successfuly in Redis with ttl',
       input,
       setup: async () => { },
@@ -73,7 +77,8 @@ describe('REDIS SAVE ACTION', () => {
         expect(cache).toStrictEqual(result);
       }
     },
-  ])('$should', async ({ expected, input, setup }) => {
+  ])('$should', async ({ run, expected, input, setup }) => {
+    if (!run) return;
     if (setup) await setup();
     return action.execute<typeof value>(input).then(expected).catch(expected);
   })

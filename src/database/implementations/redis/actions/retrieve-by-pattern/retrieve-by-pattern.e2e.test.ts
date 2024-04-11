@@ -5,7 +5,7 @@ import { disconnectTestRepository, initializeTestRepository } from "@database/fa
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { RetrieveByPatternAction } from "./action";
-import { RedisCacheRepository } from "../../redis.repository";
+import { describe, beforeAll, afterAll, beforeEach, it, expect } from 'vitest'
 
 
 describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
@@ -13,6 +13,7 @@ describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
   let action: RetrieveByPatternAction
 
   beforeAll(async () => {
+
     repository = await initializeTestRepository(AdaptersEnum.REDIS, {
       host: process.env.REDIS_HOST as string,
       port: Number(process.env.REDIS_PORT),
