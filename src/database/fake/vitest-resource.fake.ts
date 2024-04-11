@@ -1,4 +1,4 @@
-import { IResource } from "../interfaces"
+import { IResource } from '@database/interfaces'
 import { vi } from 'vitest'
 
 export class VitestFakeResource implements IResource {

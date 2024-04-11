@@ -1,4 +1,4 @@
-import { IResource } from "../interfaces"
+import { IResource } from "@database/interfaces"
 
 export class JestFakeResource implements IResource {
   public logger = jest.fn()

@@ -1,5 +1,6 @@
-import { ICacheRepository, RetrieveOrSaveActionInput } from ".."
+import { ICacheRepository } from "@database/interfaces";
 import { JestFakeResource } from "./jest-resource.fake";
+import { RetrieveOrSaveActionInput } from "@database/types";
 
 export class JestFakeCacheRepository extends JestFakeResource implements ICacheRepository {
   constructor() {

@@ -1,5 +1,5 @@
-import { DataSourceOptions } from "../types/data-source-options.type";
 import { AdaptersEnum } from "@database/enums";
+import { DataSourceOptions } from "@database/types";
 
 export abstract class IResource<Adapter extends AdaptersEnum = any, Client = any> {
   public _client?: Client

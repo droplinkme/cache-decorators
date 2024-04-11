@@ -1,6 +1,7 @@
-import { ICacheRepository, RetrieveOrSaveActionInput } from ".."
+import { ICacheRepository } from "@database/interfaces";
 import { VitestFakeResource } from "./vitest-resource.fake";
 import { vi } from 'vitest'
+import { RetrieveOrSaveActionInput } from "@database/types";
 
 export class VitestFakeCacheRepository extends VitestFakeResource implements ICacheRepository {
   constructor() {
