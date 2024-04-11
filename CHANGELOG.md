@@ -1,3 +1,11 @@
+## [1.8.2](https://github.com/droplinkme/cache-decorators/compare/v1.8.1...v1.8.2) (2024-04-11)
+
+
+### Bug Fixes
+
+* ensure build generated ts types ([c0d259d](https://github.com/droplinkme/cache-decorators/commit/c0d259d47ca85125ae2eefd1acc9330a7c4940b2))
+* update .lock ([9a1f3bf](https://github.com/droplinkme/cache-decorators/commit/9a1f3bffe3ca5ebe57cce03084c7a59b5ffc0130))
+
 ## [1.8.1](https://github.com/droplinkme/cache-decorators/compare/v1.8.0...v1.8.1) (2024-04-11)
 
 
