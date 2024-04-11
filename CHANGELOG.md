@@ -1,3 +1,10 @@
+## [1.8.5](https://github.com/droplinkme/cache-decorators/compare/v1.8.4...v1.8.5) (2024-04-11)
+
+
+### Bug Fixes
+
+* update import paths and change package type to commonjs ([3003c20](https://github.com/droplinkme/cache-decorators/commit/3003c20e637c9e7c134a3c6492a4b0864430d3e8))
+
 ## [1.8.4](https://github.com/droplinkme/cache-decorators/compare/v1.8.3...v1.8.4) (2024-04-11)
 
 
