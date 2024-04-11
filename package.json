@@ -19,7 +19,7 @@
   "module": "./built/index.mjs",
   "types": "./built/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./built && swc src index.ts fake.ts -d built",
+    "build": "rm -rf ./built && swc src index.ts fake.ts -d built && tsc --emitDeclarationOnly --outDir ./built",
     "prepare": "yarn build && cp package.json built",
     "test": "vitest --config vitest.config.unit.ts",
     "test:cov": "vitest --coverage --config vitest.config.unit.ts",
