@@ -2,6 +2,8 @@
   "$schema": "https://json.schemastore.org/swcrc",
   "sourceMaps": true,
   "jsc": {
+    "target": "es2021",
+    "keepClassNames": true,
     "parser": {
       "syntax": "typescript",
       "tsx": true,
@@ -12,7 +14,11 @@
       "legacyDecorator": true,
       "decoratorMetadata": true
     },
-    "baseUrl": "./",
+    "baseUrl": ".",
+    "experimental": {
+      "keepImportAssertions": true
+    },
+    "preserveAllComments": true,
     "paths": {
       "@core/*": ["./src/core/*"],
       "@database/*": ["./src/database/*"]
