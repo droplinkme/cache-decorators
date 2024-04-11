@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/droplinkme/cache-decorators/compare/v1.8.0...v1.8.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* resolve build root files for export ([03a5438](https://github.com/droplinkme/cache-decorators/commit/03a5438e42b410ee4fb55d8b43ec515f3dfca346))
+
 # [1.8.0](https://github.com/droplinkme/cache-decorators/compare/v1.7.0...v1.8.0) (2024-04-11)
 
 
