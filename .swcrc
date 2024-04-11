@@ -3,21 +3,17 @@
   "sourceMaps": true,
   "jsc": {
     "target": "es2021",
-    "keepClassNames": true,
     "parser": {
       "syntax": "typescript",
-      "tsx": true,
+      "dynamicImport": true,
       "decorators": true,
-      "dynamicImport": true
+      "dts": true
     },
     "transform": {
       "legacyDecorator": true,
       "decoratorMetadata": true
     },
     "baseUrl": ".",
-    "experimental": {
-      "keepImportAssertions": true
-    },
     "preserveAllComments": true,
     "paths": {
       "@core/*": ["./src/core/*"],

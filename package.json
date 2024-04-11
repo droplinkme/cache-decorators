@@ -4,7 +4,7 @@
   "description": "A library for caching with decorators",
   "author": "Allan C Vieira <allancnfx.vieira@gmail.com>",
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "keywords": [
     "typescript",
     "cache",
