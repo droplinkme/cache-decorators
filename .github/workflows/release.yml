@@ -17,7 +17,7 @@ jobs:
     name: release
     runs-on: ubuntu-latest
     container:
-      image: node:latest
+      image: node:20
     services:
       redis:
         image: redis
