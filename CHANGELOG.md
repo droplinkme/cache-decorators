@@ -1,3 +1,10 @@
+## [1.8.3](https://github.com/droplinkme/cache-decorators/compare/v1.8.2...v1.8.3) (2024-04-11)
+
+
+### Bug Fixes
+
+* change to type module ([43c2c7c](https://github.com/droplinkme/cache-decorators/commit/43c2c7c14c3b73719a31a406d93749914bd86dc4))
+
 ## [1.8.2](https://github.com/droplinkme/cache-decorators/compare/v1.8.1...v1.8.2) (2024-04-11)
 
 
