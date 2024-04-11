@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/droplinkme/cache-decorators/compare/v1.7.0...v1.8.0) (2024-04-11)
+
+
+### Features
+
+* change builder for swc and export new Fake for Vitest performance ([ce1fa4e](https://github.com/droplinkme/cache-decorators/commit/ce1fa4e47beace49e10fc946cad08929ecb15e1a))
+
 # [1.7.0](https://github.com/droplinkme/cache-decorators/compare/v1.6.0...v1.7.0) (2024-04-07)
 
 
