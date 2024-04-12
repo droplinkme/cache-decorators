@@ -1,16 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/swcrc",
   "sourceMaps": true,
+  "module": {
+    "type": "es6"
+  },
   "jsc": {
     "target": "esnext",
     "baseUrl": ".",
     "preserveAllComments": true,
     "parser": {
       "syntax": "typescript",
-      "dynamicImport": true,
-      "decorators": true,
       "tsx": true,
-      "dts": true
+      "decorators": true,
+      "dynamicImport": true
     },
     "transform": {
       "legacyDecorator": true,
@@ -21,8 +23,6 @@
       "@database/*": ["./src/database/*"]
     }
   },
-  "module": {
-    "type": "es6"
-  },
-  "minify": false
+  "minify": false,
+  "exclude": ["sample"]
 }

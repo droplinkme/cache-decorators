@@ -18,15 +18,20 @@
   "main": "./built/index.js",
   "module": "./built/index.mjs",
   "types": "./built/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./built/index.mjs",
+      "require": "./built/index.js"
+    }
+  },
   "scripts": {
-    "build:swc": "rm -rf ./built && swc src index.ts fake.ts -d built && tsc --emitDeclarationOnly --outDir ./built",
-    "build:tsc": "rm -rf ./built && tsc --project tsconfig.build.json && tsc-alias",
-    "prepare": "yarn build:swc && cp package.json built",
-    "test": "vitest --config vitest.config.unit.ts",
-    "test:cov": "vitest --coverage --config vitest.config.unit.ts",
-    "test:e2e": "vitest --config vitest.config.e2e.ts",
-    "test:watch": "vitest --watch --clearScreen --config vitest.config.unit.ts",
-    "test:e2e:cov": "jest --coverage=true --config=jest.config.e2e.js",
+    "build": "rm -rf ./built && tsc --project tsconfig.build.json  && tsc-alias",
+    "prepare": "yarn build && cp package.json built",
+    "test": "jest --coverage=false --config jest.config.unit.ts",
+    "test:cov": "jest --coverage --config jest.config.unit.ts",
+    "test:e2e": "jest --coverage=false --config jest.config.e2e.ts",
+    "test:e2e:cov": "jest --coverage --config jest.config.e2e.ts",
+    "test:watch": "jest --watch --config jest.config.unit.ts",
     "commit": "cz",
     "release": "standard-version",
     "semantic-release": "npx semantic-release"
@@ -49,12 +54,12 @@
     "@semantic-release/release-notes-generator": "^12.1.0",
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.4.13",
+    "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.12",
     "@types/module-alias": "^2.0.4",
     "@types/node": "^20.11.30",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
-    "@vitest/coverage-v8": "^1.4.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^16.4.5",
@@ -71,8 +76,7 @@
     "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.4.2",
-    "unplugin-swc": "^1.4.5",
-    "vitest": "^1.4.0"
+    "unplugin-swc": "^1.4.5"
   },
   "publishConfig": {
     "access": "public",

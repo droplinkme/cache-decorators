@@ -6,7 +6,6 @@ import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { SaveAction } from "./action";
 import { CachePrefixEnum } from "@core/enums";
-import { describe, beforeAll, afterAll, beforeEach, it, expect } from 'vitest'
 
 describe('REDIS SAVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;

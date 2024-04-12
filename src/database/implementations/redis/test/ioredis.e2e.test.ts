@@ -4,7 +4,6 @@ import { ICacheRepository } from "@database/index"
 import { createHashedKey } from "@core/utils/create-hash.util";
 import 'dotenv/config';
 import { disconnectTestRepository, initializeTestRepository } from "@database/fake/initialize";
-import { describe, beforeAll, afterAll, beforeEach, it, expect } from 'vitest'
 
 describe('Redis', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, any>;

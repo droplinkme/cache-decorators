@@ -5,4 +5,4 @@ import { MongoDBAdapterOptions } from "./mongodb-adapter-options.type";
 export type AdapterOptions = {
   [AdaptersEnum.REDIS]: IORedisAdapterOptions;
   // [AdaptersEnum.MONGODB]: MongoDBAdapterOptions;
-};
+} & { [key in AdaptersEnum]: AdapterOptions[key] };

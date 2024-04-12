@@ -6,7 +6,6 @@ import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { RetrieveOrSaveAction } from "./action";
 import { CachePrefixEnum } from "@core/enums";
-import { describe, beforeAll, afterAll, beforeEach, it, expect, vi } from 'vitest'
 
 describe('REDIS RETRIEVE OR SAVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;
@@ -29,7 +28,7 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
 
   const value = { id: randomUUID() };
 
-  const fn = vi.fn(async () => { return value });
+  const fn = jest.fn(async () => { return value });
 
   const input: RetrieveOrSaveActionInput<typeof value> = {
     key: randomUUID(),
@@ -51,7 +50,6 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       input,
       setup: async () => {
         await repository.save<typeof value>({ key: input.key, value })
-        fn.mockRestore()
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -67,7 +65,6 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.remove({ key: fallback_key });
-        fn.mockRestore()
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -85,7 +82,6 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.remove({ key: fallback_key });
-        fn.mockRestore()
       },
       expected: async (result: any) => {
         const cache = await repository.retrieve({ key: input.key });
@@ -101,7 +97,6 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.save<typeof value>({ key: `${CachePrefixEnum.FALLBACK}/${input.key}`, value });
-        fn.mockRestore()
         fn.mockImplementationOnce(() => {
           throw new Error("Some Error")
         })
@@ -122,7 +117,6 @@ describe('REDIS RETRIEVE OR SAVE ACTION', () => {
       setup: async () => {
         await repository.remove({ key: input.key });
         await repository.remove({ key: fallback_key });
-        fn.mockRestore()
         fn.mockImplementationOnce(() => {
           throw new Error("Some Error")
         })

@@ -5,7 +5,6 @@ import { disconnectTestRepository, initializeTestRepository } from "@database/fa
 import { randomUUID } from "crypto";
 import { Redis } from "ioredis";
 import { RemoveAction } from "./action";
-import { describe, beforeAll, afterAll, beforeEach, it, expect } from 'vitest'
 
 describe('REDIS REMOVE ACTION', () => {
   let repository: ICacheRepository<AdaptersEnum.REDIS, Redis>;

@@ -50,7 +50,7 @@ jobs:
 
       - name: Build project
         working-directory: cache-decorators
-        run: npm run build:swc
+        run: npm run build
 
       - name: Release
         working-directory: cache-decorators

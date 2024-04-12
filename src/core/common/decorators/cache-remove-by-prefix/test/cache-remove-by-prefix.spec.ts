@@ -1,13 +1,12 @@
 import { DataSource } from "@database/datasource"
 import { Input, MOCK_KEY, Mock, Output } from "./mock"
-import { VitestFakeCacheRepository } from "@database/fake"
 import { randomUUID } from "crypto"
 import { createHashedKey } from "@core/utils/create-hash.util"
 import { CachePrefixEnum } from "@core/enums"
-import { describe, it, expect } from 'vitest'
+import { JestFakeCacheRepository } from "@database/fake"
 
 describe('#CacheRemoveByPrefix', () => {
-  DataSource.setCustomRepository(new VitestFakeCacheRepository());
+  DataSource.setCustomRepository(new JestFakeCacheRepository());
   const repository = DataSource.getRepository();
   const mock = new Mock()
 
