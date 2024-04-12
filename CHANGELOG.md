@@ -1,3 +1,10 @@
+## [1.8.7](https://github.com/droplinkme/cache-decorators/compare/v1.8.6...v1.8.7) (2024-04-12)
+
+
+### Bug Fixes
+
+* change to commonjs build ([a3914a1](https://github.com/droplinkme/cache-decorators/commit/a3914a19940f8f37366c757fbf21c95d477d30c8))
+
 ## [1.8.6](https://github.com/droplinkme/cache-decorators/compare/v1.8.5...v1.8.6) (2024-04-12)
 
 
