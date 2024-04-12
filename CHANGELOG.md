@@ -1,3 +1,11 @@
+## [1.8.9](https://github.com/droplinkme/cache-decorators/compare/v1.8.8...v1.8.9) (2024-04-12)
+
+
+### Bug Fixes
+
+* add missing libs ([6dcacf0](https://github.com/droplinkme/cache-decorators/commit/6dcacf094190bce15229d0dbdd8092c3e905a869))
+* update package and tsconfig ([a97dac4](https://github.com/droplinkme/cache-decorators/commit/a97dac427f02bf6e2aa3ca49563c00a0d56de92d))
+
 ## [1.8.8](https://github.com/droplinkme/cache-decorators/compare/v1.8.7...v1.8.8) (2024-04-12)
 
 
