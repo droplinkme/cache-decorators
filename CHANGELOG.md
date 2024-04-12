@@ -1,3 +1,10 @@
+## [1.8.8](https://github.com/droplinkme/cache-decorators/compare/v1.8.7...v1.8.8) (2024-04-12)
+
+
+### Bug Fixes
+
+* change to es2021 ([fb2867b](https://github.com/droplinkme/cache-decorators/commit/fb2867b27484a787ef2b973003efc2ccc48e4ba5))
+
 ## [1.8.7](https://github.com/droplinkme/cache-decorators/compare/v1.8.6...v1.8.7) (2024-04-12)
 
 
