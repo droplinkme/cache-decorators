@@ -1,3 +1,10 @@
+## [1.8.6](https://github.com/droplinkme/cache-decorators/compare/v1.8.5...v1.8.6) (2024-04-12)
+
+
+### Bug Fixes
+
+* remove vitest ([b93993a](https://github.com/droplinkme/cache-decorators/commit/b93993ac2531cbf6301ccf8936f64ad7055a0d34))
+
 ## [1.8.5](https://github.com/droplinkme/cache-decorators/compare/v1.8.4...v1.8.5) (2024-04-11)
 
 
