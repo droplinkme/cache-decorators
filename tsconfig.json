@@ -8,7 +8,7 @@
     "typeRoots": ["./node_modules/@types"],
     "target": "es6",
     "lib": ["es2022", "ES6"],
-    "module": "es6",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "sourceMap": true,
     "allowJs": true,
