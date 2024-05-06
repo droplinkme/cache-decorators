@@ -45,7 +45,7 @@ describe('REDIS RETRIEVE BY PATTERN ACTION', () => {
         const retrievalPromises = keys.map(key => repository.retrieve<{ id: string }>({ key }));
         const retrievedValues = await Promise.all(retrievalPromises) as unknown as { id: string }[];
         const compare = values.map(({ value }) => value)
-        const sortedResult = result.sort((a, b) => a.id.localeCompare(b.id));
+        const sortedResult = result?.sort((a, b) => a.id.localeCompare(b.id));
         const sortedCompare = compare.sort((a, b) => a.id.localeCompare(b.id));
         const sortedRetrievedValues = retrievedValues.sort((a, b) => a.id.localeCompare(b.id))
         expect(sortedResult).toStrictEqual(sortedCompare)

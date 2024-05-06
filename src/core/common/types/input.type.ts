@@ -20,7 +20,7 @@ export type Input<I = any, O = any> = {
 
   /**
     * The key used to identify the cache entry.
-    * @type {Key<I, O>}
+    * @type {Key<I[], O>}
     */
   key: Key<I, O>;
 

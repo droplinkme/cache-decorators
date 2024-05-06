@@ -43,7 +43,7 @@ export function CacheSave<I = any, O = any>(input: Omit<Input<I, O>, 'no_cache'>
    */
   const action: Action<I, O, ICacheRepository> = async ({ instance, method, args, repository }) => {
     const output = await method.apply(instance, args);
-    const key = await getKey({ ...input, input: args[0], output });
+    const key = await getKey({ ...input, input: args, output });
     await repository.save<O>({
       key: input.hashable_key ? createHashedKey(key) : key as string,
       value: output,

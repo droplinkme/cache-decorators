@@ -6,14 +6,14 @@ import { DataSourceOptions } from "@database/types";
 export async function initializeTestRepository<Adapter extends AdaptersEnum>(adapter: Adapter, options: DataSourceOptions<Adapter>) {
   const repository = await DataSource.initialize<Adapter>(adapter, options);
   await new Promise((resolve) => {
-    setTimeout(resolve, 1000)
+    setTimeout(resolve, 1500)
   })
   return repository;
 }
 
 export async function disconnectTestRepository(repository: ICacheRepository) {
   await new Promise((resolve) => {
-    setTimeout(resolve, 1000)
+    setTimeout(resolve, 1500)
   })
   await repository.flushAll()
   repository.disconnect();
