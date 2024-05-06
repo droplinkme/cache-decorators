@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/droplinkme/cache-decorators/compare/v1.8.9...v1.9.0) (2024-05-06)
+
+
+### Features
+
+* add new decorator cache response ([6e24f19](https://github.com/droplinkme/cache-decorators/commit/6e24f198d8ef8359918e561d5310e703ee4be146))
+
 ## [1.8.9](https://github.com/droplinkme/cache-decorators/compare/v1.8.8...v1.8.9) (2024-04-12)
 
 
