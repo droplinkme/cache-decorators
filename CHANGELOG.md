@@ -1,3 +1,11 @@
+## [1.9.2](https://github.com/droplinkme/cache-decorators/compare/v1.9.1...v1.9.2) (2024-06-26)
+
+
+### Bug Fixes
+
+* add access client instance in interface ([c74a764](https://github.com/droplinkme/cache-decorators/commit/c74a76453bbe473abda28dd26f77ace85f322897))
+* update .lock file and libraries ([16d0f9c](https://github.com/droplinkme/cache-decorators/commit/16d0f9c8c71cc51b442f7dff759e25e16a6d95ea))
+
 ## [1.9.1](https://github.com/droplinkme/cache-decorators/compare/v1.9.0...v1.9.1) (2024-05-06)
 
 
